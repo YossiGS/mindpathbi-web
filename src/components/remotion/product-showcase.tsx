@@ -16,12 +16,12 @@ const C = {
   text: "#f5f5f7",
   textSec: "#a1a1a6",
   textMut: "#6e6e73",
-  accent: "#f5f5f7",
-  accentBg: "rgba(255,255,255,0.06)",
-  gmail: "#f5f5f7",
-  whatsapp: "#f5f5f7",
-  slack: "#f5f5f7",
-  outlook: "#f5f5f7",
+  accent: "#2997ff",
+  accentBg: "rgba(41,151,255,0.08)",
+  gmail: "#EA4335",
+  whatsapp: "#25D366",
+  slack: "#E01E5A",
+  outlook: "#0078D4",
   green: "#30d158",
 };
 
@@ -74,7 +74,7 @@ function ContactPanel() {
       <div style={{ width: 200, borderLeft: `1px solid ${C.border}`, background: "rgba(255,255,255,0.015)", padding: 12, flexShrink: 0, overflow: "hidden" }}>
         <div style={{ fontSize: 9, fontWeight: 600, color: C.textMut, letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: 10 }}>Contact</div>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
-          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(129,140,248,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: C.accent }}>SJ</div>
+          <div style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(41,151,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: C.accent }}>SJ</div>
           <div>
             <div style={{ fontSize: 11.5, fontWeight: 600, color: C.text }}>Sarah Johnson</div>
             <div style={{ fontSize: 9, color: C.textMut }}>VP Ops · Acme Corp</div>
@@ -99,7 +99,7 @@ function ContactPanel() {
         </div>
         <div style={{ fontSize: 9, fontWeight: 600, color: C.textMut, letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: 7 }}>AI Insights</div>
         <Fade delay={80}>
-          <div style={{ background: "rgba(129,140,248,0.06)", border: "1px solid rgba(129,140,248,0.12)", borderRadius: 6, padding: 8, marginBottom: 6 }}>
+          <div style={{ background: "rgba(41,151,255,0.06)", border: "1px solid rgba(41,151,255,0.12)", borderRadius: 6, padding: 8, marginBottom: 6 }}>
             <div style={{ fontSize: 9, fontWeight: 600, color: C.accent, marginBottom: 3 }}>Sentiment</div>
             <div style={{ fontSize: 10, color: C.textSec, lineHeight: 1.4 }}><span style={{ color: C.green, fontWeight: 600 }}>Positive</span> — Strong renewal intent</div>
           </div>
@@ -121,8 +121,8 @@ export const ProductShowcase: React.FC = () => {
       {/* SIDEBAR */}
       <Fade delay={0} dx={-8} dy={0}>
         <div style={{ width: 46, height: "100%", background: C.sidebar, borderRight: `1px solid ${C.border}`, display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 10, gap: 2, flexShrink: 0, position: "absolute", left: 0, top: 0, bottom: 0 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 7, background: "linear-gradient(135deg, #818cf8, #a78bfa)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
-            <span style={{ fontSize: 11, fontWeight: 800, color: "#fff" }}>M</span>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: "#f5f5f7", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
+            <span style={{ fontSize: 11, fontWeight: 800, color: "#000" }}>M</span>
           </div>
           {["inbox", "dash", "contacts", "companies", "deals", "tasks", "insights"].map((item, i) => (
             <div key={item} style={{ width: 32, height: 28, borderRadius: 5, background: i === 0 ? C.accentBg : "transparent", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -150,7 +150,7 @@ export const ProductShowcase: React.FC = () => {
               <div style={{ width: 100, height: 24, borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", padding: "0 7px" }}>
                 <span style={{ fontSize: 9, color: C.textMut }}>⌘K Search...</span>
               </div>
-              <div style={{ width: 24, height: 24, borderRadius: "50%", background: "linear-gradient(135deg, #818cf8, #a78bfa)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 700, color: "#fff" }}>YG</div>
+              <div style={{ width: 24, height: 24, borderRadius: "50%", background: C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 700, color: "#fff" }}>YG</div>
             </div>
           </div>
         </Fade>
@@ -216,7 +216,7 @@ export const ProductShowcase: React.FC = () => {
                 </Fade>
                 <Fade delay={70}>
                   <div style={{ background: C.card, borderRadius: 8, border: `1px solid ${C.border}`, padding: 12 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", background: "rgba(129,140,248,0.06)", border: "1px solid rgba(129,140,248,0.15)", borderRadius: 6, marginBottom: 8 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", background: "rgba(41,151,255,0.06)", border: "1px solid rgba(41,151,255,0.12)", borderRadius: 6, marginBottom: 8 }}>
                       <span style={{ fontSize: 9 }}>✨</span>
                       <span style={{ fontSize: 10, color: C.accent, fontWeight: 500 }}>AI suggested reply</span>
                     </div>

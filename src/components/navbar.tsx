@@ -66,7 +66,7 @@ export function Navbar() {
 
         <a
           href="mailto:mindpathbi@proton.me?subject=Early%20Access%20Request&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27m%20interested%20in%20early%20access.%0A%0AThanks!"
-          className="rounded-full bg-foreground px-4 py-1.5 text-xs font-medium text-black transition-opacity hover:opacity-80"
+          className="rounded-full bg-accent px-4 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-80"
         >
           Contact Us
         </a>

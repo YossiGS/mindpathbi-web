@@ -6,17 +6,8 @@ export function Hero() {
   return (
     <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 pt-12">
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
-        <motion.p
-          className="text-sm font-medium text-muted"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          Currently in Alpha
-        </motion.p>
-
         <motion.h1
-          className="mt-4 text-5xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[80px]"
+          className="text-5xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[80px]"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -44,7 +35,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <a
-            href="mailto:mindpathbi@proton.me?subject=Early%20Access%20Request&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27m%20interested%20in%20early%20access.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
+            href="mailto:mindpathbi@proton.me?subject=MindPath%20BI%20Inquiry&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27d%20like%20to%20learn%20more.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
             className="rounded-full bg-foreground px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-80"
           >
             Get in touch
