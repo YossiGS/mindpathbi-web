@@ -71,6 +71,29 @@ const scenarios = [
     description:
       "No dashboard, no score, no signal. Just a gut feeling. By the time you realize an account is unhappy — they've left.",
   },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+      </svg>
+    ),
+    title: "\"I'll ask my boss and get back to you.\"",
+    description:
+      "A customer asks a technical question — how to build a pergola, which product fits their spec, what the installation rules are. Your rep doesn't know. The answer lives in someone's head, not in a system. The customer waits. The deal cools off.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2" />
+        <path d="M12 12h.01" />
+        <path d="M17 12h.01" />
+        <path d="M7 12h.01" />
+      </svg>
+    ),
+    title: "Knowledge trapped in people's heads.",
+    description:
+      "Product specs, pricing rules, installation guides, sizing tables — it all lives in spreadsheets, PDFs, or just tribal knowledge. When the expert is unavailable, everyone else guesses.",
+  },
 ];
 
 export function Problem() {
@@ -92,7 +115,7 @@ export function Problem() {
           </h2>
         </motion.div>
 
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {scenarios.map((s, i) => (
             <motion.div
               key={s.title}

@@ -28,7 +28,7 @@ const features = [
   {
     title: "AI Copilot",
     description:
-      "Suggested replies, auto-classification, knowledge base matches, similar threads, and sentiment analysis — all while you type.",
+      "Detects technical questions in real time and surfaces answers from your knowledge base — so any rep can respond like an expert without asking the boss.",
     color: "#ff9f0a",
     icon: (
       <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -39,7 +39,7 @@ const features = [
   {
     title: "Knowledge Base",
     description:
-      "Upload docs, URLs, or text. AI Builder generates articles from chat. Vector search surfaces answers during live conversations.",
+      "Upload product specs, sizing rules, installation guides, or any domain expertise. When a customer asks a technical question, the AI Copilot pulls the right answer instantly — turning every team member into a subject-matter expert.",
     color: "#64d2ff",
     icon: (
       <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
