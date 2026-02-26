@@ -14,6 +14,7 @@ const connectors = [
 ];
 
 const futureConnectors = [
+  { name: "Live Call Stream", desc: "Real-time phone → AI context", color: "#ff9f0a" },
   { name: "Slack", desc: "Channels & DMs", color: "#E01E5A" },
   { name: "SAP S/4HANA", desc: "OData v4 connector", color: "#0FAAFF" },
   { name: "Instagram", desc: "DMs & comments", color: "#E1306C" },
@@ -90,7 +91,7 @@ export function Integrations() {
         >
           {[
             { value: "8", label: "Live now" },
-            { value: "17+", label: "Coming soon" },
+            { value: "18+", label: "Coming soon" },
             { value: "<5 min", label: "Setup" },
             { value: "2-way", label: "Sync" },
           ].map((stat) => (

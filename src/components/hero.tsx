@@ -27,30 +27,31 @@ export function Hero() {
           integrations&nbsp;— built for teams that refuse to lose another
           customer to fragmented tools.
         </motion.p>
-
-        <motion.div
-          className="mt-8 flex items-center gap-4"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <a
-            href="mailto:mindpathbi@proton.me?subject=MindPath%20BI%20Inquiry&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27d%20like%20to%20learn%20more.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
-            className="rounded-full bg-foreground px-7 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80"
-          >
-            Get in touch
-          </a>
-          <a
-            href="#preview"
-            className="flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-accent transition-opacity hover:opacity-80"
-          >
-            See how it works
-            <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </a>
-        </motion.div>
       </div>
+
+      <motion.div
+        className="absolute bottom-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1 }}
+      >
+        <motion.svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-muted/40"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <polyline points="7 13 12 18 17 13" />
+          <polyline points="7 6 12 11 17 6" />
+        </motion.svg>
+      </motion.div>
     </section>
   );
 }
