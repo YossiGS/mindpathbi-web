@@ -1,0 +1,21 @@
+"use client";
+
+import { Player } from "@remotion/player";
+import { ProductShowcase } from "./remotion/product-showcase";
+
+export default function RemotionPlayerWrapper() {
+  return (
+    <Player
+      component={ProductShowcase}
+      durationInFrames={180}
+      compositionWidth={1280}
+      compositionHeight={720}
+      fps={30}
+      style={{ width: "100%", height: "100%" }}
+      loop
+      autoPlay
+      controls={false}
+      acknowledgeRemotionLicense
+    />
+  );
+}
