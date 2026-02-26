@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-background">
-      <nav className="border-b border-white/[0.06]">
+      <nav className="border-b border-border">
         <div className="mx-auto flex h-12 max-w-3xl items-center px-6">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-foreground">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-background">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
               </svg>
@@ -27,7 +27,7 @@ export default function TermsPage() {
         <h1 className="text-4xl font-bold tracking-tight">Terms of Service</h1>
         <p className="mt-2 text-sm text-muted">Last updated: February 26, 2026</p>
 
-        <div className="prose-invert mt-10 space-y-8 text-[15px] leading-relaxed text-muted">
+        <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-muted">
           <p>
             These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the MindPath BI
             platform (&ldquo;Service&rdquo;) operated by MindPath BI (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;).
@@ -89,7 +89,7 @@ export default function TermsPage() {
           <section>
             <h2 className="mb-3 text-xl font-semibold text-foreground">6. Third-Party Integrations</h2>
             <p>
-              The Service connects to third-party platforms (e.g., Google, Microsoft, Meta, Slack).
+              The Service connects to third-party platforms (e.g., Google, Microsoft, Meta).
               Your use of those integrations is also subject to the respective third-party terms of
               service. We are not responsible for the availability or conduct of third-party services.
             </p>
@@ -109,8 +109,7 @@ export default function TermsPage() {
             <p>
               To the maximum extent permitted by law, MindPath BI shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages, or any loss of profits, data, or
-              goodwill arising from your use of the Service. Our total liability shall not exceed the
-              amount you paid us in the twelve (12) months preceding the claim.
+              goodwill arising from your use of the Service.
             </p>
           </section>
 
@@ -119,8 +118,7 @@ export default function TermsPage() {
             <p>
               The Service is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without warranties of any kind,
               whether express or implied, including but not limited to implied warranties of merchantability,
-              fitness for a particular purpose, and non-infringement. We do not warrant that the Service will
-              be uninterrupted, error-free, or secure.
+              fitness for a particular purpose, and non-infringement.
             </p>
           </section>
 
@@ -159,7 +157,7 @@ export default function TermsPage() {
           </section>
         </div>
 
-        <div className="mt-16 border-t border-white/[0.06] pt-8 text-center text-xs text-muted">
+        <div className="mt-16 border-t border-border pt-8 text-center text-xs text-muted">
           &copy; 2026 MindPath BI. All rights reserved.
         </div>
       </main>
