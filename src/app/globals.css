@@ -2,7 +2,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
+@theme {
   --color-background: #000000;
   --color-surface: #1d1d1f;
   --color-surface-light: #2d2d2f;
@@ -49,10 +49,10 @@ body {
 /* ===== Light Mode ===== */
 html.light {
   --color-background: #ffffff;
-  --color-surface: #f5f5f7;
-  --color-surface-light: #e8e8ed;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-light: rgba(0, 0, 0, 0.12);
+  --color-surface: #f2f2f7;
+  --color-surface-light: #e5e5ea;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-light: rgba(0, 0, 0, 0.15);
   --color-foreground: #1d1d1f;
   --color-muted: #6e6e73;
   --color-accent: #0071e3;

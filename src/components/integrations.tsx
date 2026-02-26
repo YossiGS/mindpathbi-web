@@ -7,15 +7,15 @@ const connectors = [
   { name: "Outlook", desc: "Microsoft Graph API", status: "live", color: "#0078D4" },
   { name: "IMAP/SMTP", desc: "Any email provider", status: "live", color: "#8B5CF6" },
   { name: "WhatsApp", desc: "Business API · Coexistence Mode", status: "live", color: "#25D366" },
-  { name: "Slack", desc: "Channels & DMs", status: "live", color: "#E01E5A" },
   { name: "SAP B1", desc: "Service Layer API", status: "live", color: "#0FAAFF" },
-  { name: "SAP S/4HANA", desc: "OData v4 connector", status: "beta", color: "#0FAAFF" },
   { name: "Priority", desc: "REST API integration", status: "live", color: "#FF6B00" },
   { name: "WooCommerce", desc: "Orders & customers", status: "live", color: "#96588A" },
   { name: "WordPress", desc: "Content & forms", status: "live", color: "#21759B" },
 ];
 
 const futureConnectors = [
+  { name: "Slack", desc: "Channels & DMs", color: "#E01E5A" },
+  { name: "SAP S/4HANA", desc: "OData v4 connector", color: "#0FAAFF" },
   { name: "Instagram", desc: "DMs & comments", color: "#E1306C" },
   { name: "Messenger", desc: "Facebook & pages", color: "#0084FF" },
   { name: "LinkedIn", desc: "InMail & connections", color: "#0A66C2" },
@@ -60,7 +60,7 @@ export function Integrations() {
         </motion.div>
 
         {/* Live connectors */}
-        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {connectors.map((c, i) => (
             <motion.div
               key={c.name}
@@ -89,8 +89,8 @@ export function Integrations() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {[
-            { value: "10", label: "Live now" },
-            { value: "15+", label: "Coming soon" },
+            { value: "8", label: "Live now" },
+            { value: "17+", label: "Coming soon" },
             { value: "<5 min", label: "Setup" },
             { value: "2-way", label: "Sync" },
           ].map((stat) => (
