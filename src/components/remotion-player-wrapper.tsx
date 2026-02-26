@@ -7,7 +7,7 @@ export default function RemotionPlayerWrapper() {
   return (
     <Player
       component={ProductShowcase}
-      durationInFrames={180}
+      durationInFrames={210}
       compositionWidth={1280}
       compositionHeight={720}
       fps={30}
