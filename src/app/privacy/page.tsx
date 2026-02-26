@@ -56,11 +56,18 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">3. Cookies &amp; Tracking</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">3. Analytics &amp; Cookies</h2>
             <p>
-              This website does not use cookies, analytics trackers, or any third-party tracking technologies.
+              This website uses <strong className="text-foreground">Vercel Web Analytics</strong>, a privacy-friendly
+              analytics service provided by Vercel Inc. Vercel Analytics collects anonymous, aggregated page-view
+              data to help us understand how visitors use the site. It does not use cookies, does not collect
+              personal information, does not track you across websites, and is fully compliant with GDPR, CCPA,
+              and PECR without requiring a cookie consent banner.
+            </p>
+            <p className="mt-3">
               The MindPath BI application (app.mindpathbi.com) uses only essential session cookies required
-              for authentication. We do not use advertising cookies, cross-site tracking, or fingerprinting.
+              for authentication. We do not use advertising cookies, cross-site tracking, or fingerprinting
+              on any of our properties.
             </p>
           </section>
 
