@@ -36,15 +36,15 @@ export function Hero() {
         >
           <a
             href="mailto:mindpathbi@proton.me?subject=MindPath%20BI%20Inquiry&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27d%20like%20to%20learn%20more.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
-            className="rounded-full bg-foreground px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-80"
+            className="rounded-full bg-foreground px-7 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80"
           >
             Get in touch
           </a>
           <a
-            href="#demo"
+            href="#preview"
             className="flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-accent transition-opacity hover:opacity-80"
           >
-            Watch demo
+            See how it works
             <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>

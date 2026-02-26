@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] py-6 px-6">
+    <footer className="border-t border-border py-6 px-6">
       <div className="mx-auto flex max-w-[980px] flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="text-xs text-muted">
           &copy; 2026 MindPath BI. All rights reserved.

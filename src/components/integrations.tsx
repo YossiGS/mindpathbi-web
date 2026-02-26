@@ -6,7 +6,7 @@ const connectors = [
   { name: "Gmail", desc: "OAuth 2.0 · Real-time sync", status: "live", color: "#EA4335" },
   { name: "Outlook", desc: "Microsoft Graph API", status: "live", color: "#0078D4" },
   { name: "IMAP/SMTP", desc: "Any email provider", status: "live", color: "#8B5CF6" },
-  { name: "WhatsApp", desc: "Business API · Cloud", status: "live", color: "#25D366" },
+  { name: "WhatsApp", desc: "Business API · Coexistence Mode", status: "live", color: "#25D366" },
   { name: "Slack", desc: "Channels & DMs", status: "live", color: "#E01E5A" },
   { name: "SAP B1", desc: "Service Layer API", status: "live", color: "#0FAAFF" },
   { name: "SAP S/4HANA", desc: "OData v4 connector", status: "beta", color: "#0FAAFF" },

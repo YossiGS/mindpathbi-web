@@ -6,7 +6,7 @@ const features = [
   {
     title: "Unified Inbox",
     description:
-      "Gmail, Outlook, WhatsApp, Slack — every conversation in one timeline. Smart routing, AI classification, and instant context for every message.",
+      "Gmail, Outlook, WhatsApp, Slack — every conversation in one timeline. Smart routing, AI classification, and instant context.",
     color: "#2997ff",
     icon: (
       <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -17,7 +17,7 @@ const features = [
   {
     title: "Client 360",
     description:
-      "Full customer profile with communication history, health scores, deal pipeline, tasks, and financials. Every touchpoint, one view.",
+      "Full customer profile with communication history, health scores, deal pipeline, tasks, financials, and relationship graph.",
     color: "#bf5af2",
     icon: (
       <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -28,7 +28,7 @@ const features = [
   {
     title: "AI Copilot",
     description:
-      "Semantic search, suggested replies, auto-classification, and real-time insights. Your team gets smarter with every interaction.",
+      "Suggested replies, auto-classification, knowledge base matches, similar threads, and sentiment analysis — all while you type.",
     color: "#ff9f0a",
     icon: (
       <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -37,13 +37,57 @@ const features = [
     ),
   },
   {
-    title: "Ontology Platform",
+    title: "Knowledge Base",
     description:
-      "Connected object graph with dynamic registries, pipeline DAG, data lineage, and visual workflows for your entire operation.",
+      "Upload docs, URLs, or text. AI Builder generates articles from chat. Vector search surfaces answers during live conversations.",
+    color: "#64d2ff",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+      </svg>
+    ),
+  },
+  {
+    title: "Workflow Automations",
+    description:
+      "Event-driven workflows with AI steps, conditions, delays, and actions. Automate routing, escalations, and follow-ups.",
     color: "#30d158",
     icon: (
       <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Identity Resolution",
+    description:
+      "AI-powered duplicate detection with confidence scoring. Merge contacts, track history, and keep your CRM clean automatically.",
+    color: "#ff375f",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Ontology Platform",
+    description:
+      "Connected object graph with dynamic registries, pipeline DAG, operations canvas, and visual data lineage for your entire operation.",
+    color: "#5e5ce6",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+      </svg>
+    ),
+  },
+  {
+    title: "Analytics & Reporting",
+    description:
+      "Trends, activity breakdowns, top contacts, and CSV exports. See how your team performs across 7, 30, and 90-day windows.",
+    color: "#ff453a",
+    icon: (
+      <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
       </svg>
     ),
   },
@@ -68,21 +112,21 @@ export function Features() {
           </h2>
         </motion.div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
-              className="group rounded-2xl bg-surface p-8 transition-colors hover:bg-surface-light"
+              className="group rounded-2xl bg-surface p-7 transition-colors hover:bg-surface-light"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
             >
               <div style={{ color: feature.color }}>
                 {feature.icon}
               </div>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight">{feature.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-muted">
+              <h3 className="mt-4 text-[15px] font-semibold tracking-tight">{feature.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-muted">
                 {feature.description}
               </p>
             </motion.div>

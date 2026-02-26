@@ -45,3 +45,33 @@ body {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* ===== Light Mode ===== */
+html.light {
+  --color-background: #ffffff;
+  --color-surface: #f5f5f7;
+  --color-surface-light: #e8e8ed;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-light: rgba(0, 0, 0, 0.12);
+  --color-foreground: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-accent: #0071e3;
+  --color-accent-bright: #0071e3;
+}
+
+html.light body {
+  background: #ffffff;
+  color: #1d1d1f;
+}
+
+html.light ::selection {
+  background-color: rgba(0, 113, 227, 0.2);
+  color: #1d1d1f;
+}
+
+html.light .gradient-text {
+  background: linear-gradient(to right, #1d1d1f, #6e6e73);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

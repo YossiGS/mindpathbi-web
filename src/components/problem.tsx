@@ -84,7 +84,7 @@ export function Problem() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium text-muted">The problem</p>
+          <p className="text-sm font-medium text-[#ff453a]">The problem</p>
           <h2 className="mt-3 text-3xl font-bold tracking-[-0.02em] sm:text-4xl lg:text-[48px] lg:leading-[1.08]">
             Small teams. Big expectations.
             <br />
@@ -96,13 +96,13 @@ export function Problem() {
           {scenarios.map((s, i) => (
             <motion.div
               key={s.title}
-              className="rounded-2xl bg-surface p-7 transition-colors hover:bg-surface-light"
+              className="group rounded-2xl bg-surface p-7 transition-colors hover:bg-surface-light"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <div className="text-muted">
+              <div className="text-[#ff453a]/60 transition-colors group-hover:text-[#ff453a]">
                 {s.icon}
               </div>
               <h3 className="mt-4 text-[15px] font-semibold leading-snug text-foreground">

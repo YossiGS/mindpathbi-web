@@ -43,20 +43,20 @@ const demos = [
 function Loader() {
   return (
     <div className="flex h-full items-center justify-center">
-      <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-foreground" />
+      <div className="h-5 w-5 animate-spin rounded-full border-2 border-border border-t-foreground" />
     </div>
   );
 }
 
 function BrowserChrome({ url }: { url: string }) {
   return (
-    <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-2.5">
+    <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
       <div className="flex gap-1.5">
         <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
         <div className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
         <div className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
       </div>
-      <div className="ml-3 flex-1 rounded-md bg-white/[0.04] px-3 py-1 text-center text-[11px] text-muted">
+      <div className="ml-3 flex-1 rounded-md bg-surface px-3 py-1 text-center text-[11px] text-muted">
         {url}
       </div>
     </div>
@@ -65,7 +65,7 @@ function BrowserChrome({ url }: { url: string }) {
 
 export function ProductDemo() {
   return (
-    <section id="demo" className="relative py-28 px-6">
+    <section id="preview" className="relative py-28 px-6">
       <div className="mx-auto max-w-[1080px]">
         <motion.div
           className="text-center"
@@ -74,7 +74,7 @@ export function ProductDemo() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium text-muted">See it in action</p>
+          <p className="text-sm font-medium text-muted">Product preview</p>
           <h2 className="mt-3 text-3xl font-bold tracking-[-0.02em] sm:text-4xl lg:text-[48px] lg:leading-[1.08]">
             Four screens. <span className="text-muted">One platform.</span>
           </h2>
@@ -113,6 +113,10 @@ export function ProductDemo() {
             </motion.div>
           ))}
         </div>
+
+        <p className="mt-12 text-center text-[11px] text-muted/50">
+          * Animations are conceptual illustrations of the platform. Actual product interface may differ.
+        </p>
       </div>
     </section>
   );

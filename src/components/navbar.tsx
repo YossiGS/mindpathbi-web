@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,7 +17,7 @@ export function Navbar() {
     <nav
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/[0.06] bg-black/80 backdrop-blur-2xl saturate-150"
+          ? "border-b border-border bg-background/80 backdrop-blur-2xl saturate-150"
           : "bg-transparent"
       }`}
     >
@@ -28,10 +29,11 @@ export function Navbar() {
               height="14"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="black"
+              stroke="currentColor"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="text-background"
             >
               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
@@ -46,7 +48,7 @@ export function Navbar() {
           {[
             { href: "#features", label: "Features" },
             { href: "#integrations", label: "Integrations" },
-            { href: "#demo", label: "Demo" },
+            { href: "#preview", label: "Preview" },
           ].map((link) => (
             <a
               key={link.label}
@@ -64,12 +66,15 @@ export function Navbar() {
           </Link>
         </div>
 
-        <a
-          href="mailto:mindpathbi@proton.me?subject=Early%20Access%20Request&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27m%20interested%20in%20early%20access.%0A%0AThanks!"
-          className="rounded-full bg-accent px-4 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-80"
-        >
-          Contact Us
-        </a>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <a
+            href="mailto:mindpathbi@proton.me?subject=MindPath%20BI%20Inquiry&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27d%20like%20to%20learn%20more.%0A%0AThanks!"
+            className="rounded-full bg-accent px-4 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-80"
+          >
+            Contact Us
+          </a>
+        </div>
       </div>
     </nav>
   );
