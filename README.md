@@ -50,7 +50,8 @@ src/
 │   ├── product-demo.tsx        → 4 Remotion animations with descriptions
 │   ├── integrations.tsx        → 8 live + 18 roadmap connectors with icons
 │   ├── early-access.tsx        → "Let's talk" CTA section
-│   ├── footer.tsx              → Footer links
+ │   ├── faq.tsx                 → FAQ accordion section
+ │   ├── footer.tsx              → Footer links
 │   ├── theme-toggle.tsx        → System/Dark/Light toggle (localStorage)
 │   ├── remotion-player-wrapper.tsx → Dynamic Remotion Player loader
 │   └── remotion/
@@ -72,7 +73,8 @@ src/
 4. **Product Preview** — 4 Remotion animations in alternating layout (Inbox, Client 360, Dashboard, Deals). Disclaimer: *"Animations are conceptual illustrations."*
 5. **Integrations** — 8 live connectors with brand icons + stats (8 live, 18+ roadmap, <5 min setup, 2-way sync) + 18 roadmap connectors in a 6-col grid.
 6. **Let's Talk** — CTA with mailto link.
-7. **Footer** — Privacy, Terms, Contact, Sign In links.
+7. **FAQ** — 6 accordion-style questions about the platform, AI Copilot, setup, security, and getting started.
+8. **Footer** — Privacy, Terms, Contact, Sign In links.
 
 ---
 

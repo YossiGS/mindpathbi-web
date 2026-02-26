@@ -5,6 +5,7 @@ import { ProductDemo } from "@/components/product-demo";
 import { Features } from "@/components/features";
 import { Integrations } from "@/components/integrations";
 import { EarlyAccess } from "@/components/early-access";
+import { FAQ } from "@/components/faq";
 import { Footer } from "@/components/footer";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <ProductDemo />
         <Integrations />
         <EarlyAccess />
+        <FAQ />
       </main>
       <Footer />
     </>
