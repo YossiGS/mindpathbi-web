@@ -6,817 +6,310 @@ import {
   interpolate,
   spring,
   useVideoConfig,
-  Sequence,
 } from "remotion";
 
-const COLORS = {
+const C = {
   bg: "#0f0f0f",
-  sidebar: "#1a1a1a",
-  card: "#1a1a1a",
-  cardHover: "#222222",
-  border: "rgba(255,255,255,0.08)",
-  borderLight: "rgba(255,255,255,0.12)",
-  text: "#fafafa",
-  textSecondary: "#a1a1aa",
-  textMuted: "#71717a",
+  sidebar: "#161616",
+  panel: "#111113",
+  card: "#1a1a1c",
+  border: "rgba(255,255,255,0.07)",
+  text: "#f4f4f5",
+  textSec: "#a1a1aa",
+  textMut: "#63636e",
   accent: "#818cf8",
   accentBg: "rgba(129,140,248,0.1)",
   gmail: "#EA4335",
   whatsapp: "#25D366",
   slack: "#7C3AED",
   outlook: "#0078D4",
-  selected: "rgba(129,140,248,0.08)",
-  selectedBorder: "rgba(129,140,248,0.3)",
+  green: "#34d399",
 };
 
-function FadeSlide({
-  children,
-  delay,
-  direction = "up",
-}: {
-  children: React.ReactNode;
-  delay: number;
-  direction?: "up" | "right" | "left";
-}) {
+function useSpring(delay: number, config = { damping: 18, stiffness: 120 }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const progress = spring({ frame: frame - delay, fps, config: { damping: 18, stiffness: 120 } });
-  const opacity = interpolate(progress, [0, 1], [0, 1]);
-  const translate =
-    direction === "up"
-      ? `translateY(${interpolate(progress, [0, 1], [12, 0])}px)`
-      : direction === "right"
-        ? `translateX(${interpolate(progress, [0, 1], [16, 0])}px)`
-        : `translateX(${interpolate(progress, [0, 1], [-16, 0])}px)`;
-  return <div style={{ opacity, transform: translate }}>{children}</div>;
+  return spring({ frame: frame - delay, fps, config });
 }
 
-const NAV_ITEMS = [
-  { label: "Inbox", active: true },
-  { label: "Dashboard", active: false },
-  { label: "Contacts", active: false },
-  { label: "Companies", active: false },
-  { label: "Deals", active: false },
-  { label: "Tasks", active: false },
-  { label: "Insights", active: false },
-];
-
-function Sidebar({ delay }: { delay: number }) {
+function useVisible(delay: number) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const progress = spring({ frame: frame - delay, fps, config: { damping: 20, stiffness: 100 } });
-  const opacity = interpolate(progress, [0, 1], [0, 1]);
+  return frame >= delay;
+}
 
+function Fade({
+  delay,
+  children,
+  dx = 0,
+  dy = 8,
+}: {
+  delay: number;
+  children: React.ReactNode;
+  dx?: number;
+  dy?: number;
+}) {
+  const p = useSpring(delay);
   return (
     <div
       style={{
-        opacity,
-        width: 48,
-        background: COLORS.sidebar,
-        borderRight: `1px solid ${COLORS.border}`,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        paddingTop: 12,
-        gap: 2,
-        flexShrink: 0,
+        opacity: interpolate(p, [0, 1], [0, 1]),
+        transform: `translate(${interpolate(p, [0, 1], [dx, 0])}px, ${interpolate(p, [0, 1], [dy, 0])}px)`,
       }}
     >
-      <div
-        style={{
-          width: 28,
-          height: 28,
-          borderRadius: 8,
-          background: "linear-gradient(135deg, #818cf8, #a78bfa)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 12,
-        }}
-      >
-        <span style={{ fontSize: 12, fontWeight: 800, color: "#fff" }}>M</span>
-      </div>
-      {NAV_ITEMS.map((item, i) => (
-        <div
-          key={item.label}
-          style={{
-            width: 36,
-            height: 32,
-            borderRadius: 6,
-            background: item.active ? COLORS.accentBg : "transparent",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 1,
-          }}
-        >
-          <div
-            style={{
-              width: 16,
-              height: 16,
-              borderRadius: item.label === "Inbox" ? 3 : 4,
-              border: `1.5px solid ${item.active ? COLORS.accent : COLORS.textMuted}`,
-              opacity: item.active ? 1 : 0.5,
-            }}
-          />
-        </div>
-      ))}
+      {children}
     </div>
   );
 }
 
 const THREADS = [
-  {
-    from: "Sarah Johnson",
-    initials: "SJ",
-    channel: "Gmail",
-    channelColor: COLORS.gmail,
-    subject: "Re: Q3 Renewal Discussion",
-    preview: "Hi team, I've reviewed the proposal and would like to discuss the pricing...",
-    time: "2m",
-    unread: true,
-  },
-  {
-    from: "David Chen",
-    initials: "DC",
-    channel: "WhatsApp",
-    channelColor: COLORS.whatsapp,
-    subject: "Order #4521 update",
-    preview: "Quick question about the delivery timeline for our latest order...",
-    time: "15m",
-    unread: true,
-  },
-  {
-    from: "Lisa Park",
-    initials: "LP",
-    channel: "Slack",
-    channelColor: COLORS.slack,
-    subject: "#support — Integration help",
-    preview: "Our team needs assistance setting up the SAP connector for...",
-    time: "32m",
-    unread: false,
-  },
-  {
-    from: "Mike Torres",
-    initials: "MT",
-    channel: "Outlook",
-    channelColor: COLORS.outlook,
-    subject: "Partnership Opportunity",
-    preview: "I'd love to explore a potential collaboration between our companies...",
-    time: "1h",
-    unread: false,
-  },
-  {
-    from: "Emma Wilson",
-    initials: "EW",
-    channel: "Gmail",
-    channelColor: COLORS.gmail,
-    subject: "Invoice #892 — Payment Sent",
-    preview: "Confirming that payment has been processed for the latest invoice...",
-    time: "2h",
-    unread: false,
-  },
+  { from: "Sarah Johnson", ch: "Gmail", cc: C.gmail, subj: "Re: Q3 Renewal Discussion", prev: "Hi team, I've reviewed the proposal and w...", time: "2m", unread: true },
+  { from: "David Chen", ch: "WhatsApp", cc: C.whatsapp, subj: "Order #4521 update", prev: "Quick question about the delivery timeline ...", time: "15m", unread: true },
+  { from: "Lisa Park", ch: "Slack", cc: C.slack, subj: "#support — Integration help", prev: "Our team needs assistance setting up the ...", time: "32m", unread: false },
+  { from: "Mike Torres", ch: "Outlook", cc: C.outlook, subj: "Partnership Opportunity", prev: "I'd love to explore a potential collabora...", time: "1h", unread: false },
+  { from: "Emma Wilson", ch: "Gmail", cc: C.gmail, subj: "Invoice #892 — Payment Sent", prev: "Confirming that payment has been process...", time: "2h", unread: false },
 ];
 
-function ThreadCard({
-  thread,
-  selected,
-  delay,
-}: {
-  thread: (typeof THREADS)[0];
-  selected: boolean;
-  delay: number;
-}) {
-  return (
-    <FadeSlide delay={delay} direction="right">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: 10,
-          padding: "10px 14px",
-          borderBottom: `1px solid ${COLORS.border}`,
-          background: selected ? COLORS.selected : "transparent",
-          borderLeft: selected ? `2px solid ${COLORS.accent}` : "2px solid transparent",
-          cursor: "pointer",
-        }}
-      >
-        {thread.unread && (
-          <div
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: "#3b82f6",
-              marginTop: 7,
-              flexShrink: 0,
-            }}
-          />
-        )}
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: thread.unread ? 600 : 500,
-                  color: COLORS.text,
-                }}
-              >
-                {thread.from}
-              </span>
-              <span
-                style={{
-                  fontSize: 9,
-                  color: thread.channelColor,
-                  background: `${thread.channelColor}15`,
-                  border: `1px solid ${thread.channelColor}25`,
-                  padding: "0px 5px",
-                  borderRadius: 3,
-                  fontWeight: 500,
-                  lineHeight: "16px",
-                }}
-              >
-                {thread.channel}
-              </span>
-            </div>
-            <span style={{ fontSize: 10, color: COLORS.textMuted, flexShrink: 0 }}>
-              {thread.time}
-            </span>
-          </div>
-          <div
-            style={{
-              fontSize: 11.5,
-              fontWeight: thread.unread ? 600 : 400,
-              color: thread.unread ? COLORS.text : COLORS.textSecondary,
-              marginTop: 2,
-            }}
-          >
-            {thread.subject}
-          </div>
-          <div
-            style={{
-              fontSize: 11,
-              color: COLORS.textMuted,
-              marginTop: 2,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {thread.preview}
-          </div>
-        </div>
-      </div>
-    </FadeSlide>
-  );
-}
-
-function ThreadList({ delay }: { delay: number }) {
-  return (
-    <div
-      style={{
-        width: 280,
-        borderRight: `1px solid ${COLORS.border}`,
-        display: "flex",
-        flexDirection: "column",
-        flexShrink: 0,
-        overflow: "hidden",
-      }}
-    >
-      <FadeSlide delay={delay} direction="up">
-        <div
-          style={{
-            padding: "10px 14px",
-            borderBottom: `1px solid ${COLORS.border}`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span style={{ fontSize: 13, fontWeight: 600, color: COLORS.text }}>Inbox</span>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span
-              style={{
-                fontSize: 10,
-                color: COLORS.accent,
-                background: COLORS.accentBg,
-                padding: "2px 8px",
-                borderRadius: 10,
-                fontWeight: 500,
-              }}
-            >
-              12 new
-            </span>
-          </div>
-        </div>
-      </FadeSlide>
-
-      <FadeSlide delay={delay + 5} direction="up">
-        <div style={{ padding: "6px 10px", borderBottom: `1px solid ${COLORS.border}` }}>
-          <div
-            style={{
-              display: "flex",
-              gap: 4,
-              fontSize: 10,
-              fontWeight: 500,
-            }}
-          >
-            {["All", "Unread", "Urgent"].map((tab, i) => (
-              <span
-                key={tab}
-                style={{
-                  padding: "3px 10px",
-                  borderRadius: 5,
-                  background: i === 0 ? COLORS.accentBg : "transparent",
-                  color: i === 0 ? COLORS.accent : COLORS.textMuted,
-                }}
-              >
-                {tab}
-              </span>
-            ))}
-          </div>
-        </div>
-      </FadeSlide>
-
-      {THREADS.map((thread, i) => (
-        <ThreadCard
-          key={thread.from}
-          thread={thread}
-          selected={i === 0}
-          delay={delay + 10 + i * 8}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ReadingPane({ delay }: { delay: number }) {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  return (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-      <FadeSlide delay={delay} direction="up">
-        <div
-          style={{
-            padding: "10px 18px",
-            borderBottom: `1px solid ${COLORS.border}`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: COLORS.text }}>
-              Re: Q3 Renewal Discussion
-            </div>
-            <div style={{ fontSize: 11, color: COLORS.textMuted, marginTop: 2 }}>
-              Sarah Johnson · Acme Corp · 3 messages
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: 6 }}>
-            {["⭐", "✓", "📁"].map((icon) => (
-              <div
-                key={icon}
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: 6,
-                  border: `1px solid ${COLORS.border}`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 12,
-                }}
-              >
-                {icon}
-              </div>
-            ))}
-          </div>
-        </div>
-      </FadeSlide>
-
-      <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-        {/* Message content */}
-        <div style={{ flex: 1, padding: "16px 20px", overflow: "hidden" }}>
-          <Sequence from={delay + 10}>
-            <FadeSlide delay={0} direction="up">
-              <div
-                style={{
-                  background: COLORS.card,
-                  borderRadius: 10,
-                  border: `1px solid ${COLORS.border}`,
-                  padding: 16,
-                  marginBottom: 10,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                  <div
-                    style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: "50%",
-                      background: `${COLORS.gmail}20`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: COLORS.gmail,
-                    }}
-                  >
-                    SJ
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: COLORS.text }}>
-                      Sarah Johnson
-                    </div>
-                    <div style={{ fontSize: 10, color: COLORS.textMuted }}>
-                      sarah@acmecorp.com · via Gmail · 2 min ago
-                    </div>
-                  </div>
-                </div>
-                <div style={{ fontSize: 12, lineHeight: 1.7, color: COLORS.textSecondary }}>
-                  Hi team,
-                  <br />
-                  <br />
-                  I&apos;ve reviewed the Q3 renewal proposal and I&apos;m excited about the new features. A few
-                  quick questions:
-                  <br />
-                  <br />
-                  1. Can we get volume pricing for 50+ seats?
-                  <br />
-                  2. Is the AI copilot included in the enterprise tier?
-                  <br />
-                  3. Timeline for the SAP S/4HANA connector?
-                  <br />
-                  <br />
-                  Looking forward to discussing this further.
-                  <br />
-                  <br />
-                  Best,
-                  <br />
-                  Sarah
-                </div>
-              </div>
-            </FadeSlide>
-          </Sequence>
-
-          <Sequence from={delay + 30}>
-            <FadeSlide delay={0} direction="up">
-              <div
-                style={{
-                  background: COLORS.card,
-                  borderRadius: 10,
-                  border: `1px solid ${COLORS.border}`,
-                  padding: 12,
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "8px 12px",
-                    background: "rgba(129,140,248,0.06)",
-                    border: `1px solid rgba(129,140,248,0.15)`,
-                    borderRadius: 8,
-                    marginBottom: 10,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 18,
-                      height: 18,
-                      borderRadius: "50%",
-                      background: COLORS.accentBg,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: 10 }}>✨</span>
-                  </div>
-                  <span style={{ fontSize: 11, color: COLORS.accent, fontWeight: 500 }}>
-                    AI suggested reply generated
-                  </span>
-                </div>
-                <div
-                  style={{
-                    fontSize: 11.5,
-                    lineHeight: 1.6,
-                    color: COLORS.textSecondary,
-                    padding: "4px 0",
-                  }}
-                >
-                  Hi Sarah, thanks for your feedback! Here are the answers: 1) Yes, volume pricing
-                  starts at 25+ seats. 2) AI copilot is included in Enterprise. 3) SAP S/4HANA is
-                  in beta, GA in Q4...
-                </div>
-              </div>
-            </FadeSlide>
-          </Sequence>
-        </div>
-
-        {/* Copilot / Contact sidebar */}
-        <Sequence from={delay + 20}>
-          <CopilotPanel delay={0} />
-        </Sequence>
-      </div>
-    </div>
-  );
-}
-
-function CopilotPanel({ delay }: { delay: number }) {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const healthProgress = spring({
-    frame: frame - delay - 25,
-    fps,
-    config: { damping: 20, stiffness: 80 },
-  });
-  const healthWidth = interpolate(healthProgress, [0, 1], [0, 85]);
-
-  return (
-    <FadeSlide delay={delay} direction="right">
-      <div
-        style={{
-          width: 220,
-          borderLeft: `1px solid ${COLORS.border}`,
-          background: "rgba(255,255,255,0.02)",
-          padding: 14,
-          overflow: "hidden",
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 600,
-            color: COLORS.textMuted,
-            letterSpacing: "0.05em",
-            textTransform: "uppercase",
-            marginBottom: 12,
-          }}
-        >
-          Contact
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: "50%",
-              background: "rgba(129,140,248,0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 13,
-              fontWeight: 700,
-              color: COLORS.accent,
-            }}
-          >
-            SJ
-          </div>
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: COLORS.text }}>Sarah Johnson</div>
-            <div style={{ fontSize: 10, color: COLORS.textMuted }}>VP Operations · Acme Corp</div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 6,
-            marginBottom: 14,
-          }}
-        >
-          {[
-            { label: "Emails", value: "24" },
-            { label: "Deals", value: "$48K" },
-            { label: "Messages", value: "156" },
-            { label: "Tasks", value: "8" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              style={{
-                background: COLORS.card,
-                borderRadius: 6,
-                border: `1px solid ${COLORS.border}`,
-                padding: "6px 8px",
-              }}
-            >
-              <div style={{ fontSize: 9, color: COLORS.textMuted }}>{stat.label}</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: COLORS.text }}>{stat.value}</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginBottom: 14 }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 5,
-            }}
-          >
-            <span style={{ fontSize: 10, color: COLORS.textMuted }}>Health Score</span>
-            <span style={{ fontSize: 11, fontWeight: 600, color: "#34d399" }}>85%</span>
-          </div>
-          <div
-            style={{
-              height: 4,
-              borderRadius: 2,
-              background: "rgba(255,255,255,0.06)",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                height: "100%",
-                width: `${healthWidth}%`,
-                borderRadius: 2,
-                background: "linear-gradient(90deg, #34d399, #818cf8)",
-              }}
-            />
-          </div>
-        </div>
-
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 600,
-            color: COLORS.textMuted,
-            letterSpacing: "0.05em",
-            textTransform: "uppercase",
-            marginBottom: 8,
-            marginTop: 4,
-          }}
-        >
-          AI Insights
-        </div>
-
-        <Sequence from={delay + 30}>
-          <FadeSlide delay={0} direction="up">
-            <div
-              style={{
-                background: "rgba(129,140,248,0.06)",
-                border: `1px solid rgba(129,140,248,0.15)`,
-                borderRadius: 8,
-                padding: 10,
-                marginBottom: 8,
-              }}
-            >
-              <div style={{ fontSize: 10, fontWeight: 600, color: COLORS.accent, marginBottom: 4 }}>
-                Sentiment
-              </div>
-              <div style={{ fontSize: 11, color: COLORS.textSecondary, lineHeight: 1.5 }}>
-                <span style={{ color: "#34d399", fontWeight: 600 }}>Positive</span> — Customer
-                shows strong renewal intent
-              </div>
-            </div>
-          </FadeSlide>
-        </Sequence>
-
-        <Sequence from={delay + 40}>
-          <FadeSlide delay={0} direction="up">
-            <div
-              style={{
-                background: "rgba(251,191,36,0.06)",
-                border: "1px solid rgba(251,191,36,0.15)",
-                borderRadius: 8,
-                padding: 10,
-              }}
-            >
-              <div
-                style={{ fontSize: 10, fontWeight: 600, color: "#fbbf24", marginBottom: 4 }}
-              >
-                Suggested Action
-              </div>
-              <div style={{ fontSize: 11, color: COLORS.textSecondary, lineHeight: 1.5 }}>
-                Send volume pricing sheet and schedule a call this week
-              </div>
-            </div>
-          </FadeSlide>
-        </Sequence>
-      </div>
-    </FadeSlide>
-  );
-}
-
-function Topbar({ delay }: { delay: number }) {
-  return (
-    <FadeSlide delay={delay} direction="up">
-      <div
-        style={{
-          height: 40,
-          borderBottom: `1px solid ${COLORS.border}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 16px 0 12px",
-          background: COLORS.bg,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div
-            style={{
-              width: 18,
-              height: 14,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                style={{
-                  height: 1.5,
-                  width: i === 1 ? 12 : 18,
-                  background: COLORS.textMuted,
-                  borderRadius: 1,
-                }}
-              />
-            ))}
-          </div>
-          <div
-            style={{ width: 1, height: 16, background: COLORS.border }}
-          />
-          <span style={{ fontSize: 11, fontWeight: 500, color: COLORS.textMuted }}>
-            Unified BI
-          </span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div
-            style={{
-              width: 120,
-              height: 26,
-              borderRadius: 6,
-              border: `1px solid ${COLORS.border}`,
-              display: "flex",
-              alignItems: "center",
-              padding: "0 8px",
-              gap: 6,
-            }}
-          >
-            <span style={{ fontSize: 10, color: COLORS.textMuted }}>⌘K Search...</span>
-          </div>
-          <div
-            style={{
-              width: 26,
-              height: 26,
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #818cf8, #a78bfa)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 10,
-              fontWeight: 700,
-              color: "#fff",
-            }}
-          >
-            YG
-          </div>
-        </div>
-      </div>
-    </FadeSlide>
-  );
-}
-
 export const ProductShowcase: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const healthP = spring({ frame: frame - 55, fps, config: { damping: 22, stiffness: 80 } });
+  const healthW = interpolate(healthP, [0, 1], [0, 85]);
+
   return (
     <AbsoluteFill
       style={{
-        background: COLORS.bg,
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-        overflow: "hidden",
+        background: C.bg,
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        display: "flex",
+        flexDirection: "row",
       }}
     >
-      <div style={{ display: "flex", height: "100%" }}>
-        <Sequence from={0}>
-          <Sidebar delay={0} />
-        </Sequence>
+      {/* ===== SIDEBAR ===== */}
+      <Fade delay={0} dx={-8} dy={0}>
+        <div
+          style={{
+            width: 46,
+            height: "100%",
+            background: C.sidebar,
+            borderRight: `1px solid ${C.border}`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            paddingTop: 10,
+            gap: 2,
+            flexShrink: 0,
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+        >
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: "linear-gradient(135deg, #818cf8, #a78bfa)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
+            <span style={{ fontSize: 11, fontWeight: 800, color: "#fff" }}>M</span>
+          </div>
+          {["inbox", "dash", "contacts", "companies", "deals", "tasks", "insights"].map((item, i) => (
+            <div key={item} style={{ width: 32, height: 28, borderRadius: 5, background: i === 0 ? C.accentBg : "transparent", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: 14, height: 14, borderRadius: 3, border: `1.5px solid ${i === 0 ? C.accent : C.textMut}` }} />
+            </div>
+          ))}
+        </div>
+      </Fade>
 
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <Sequence from={5}>
-            <Topbar delay={0} />
-          </Sequence>
+      {/* ===== MAIN AREA ===== */}
+      <div style={{ marginLeft: 46, flex: 1, display: "flex", flexDirection: "column", height: "100%" }}>
 
-          <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
-            <Sequence from={10}>
-              <ThreadList delay={0} />
-            </Sequence>
+        {/* TOPBAR */}
+        <Fade delay={3}>
+          <div style={{ height: 36, borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 14px", background: C.bg, flexShrink: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+                <div style={{ width: 14, height: 1.5, background: C.textMut, borderRadius: 1 }} />
+                <div style={{ width: 10, height: 1.5, background: C.textMut, borderRadius: 1 }} />
+                <div style={{ width: 14, height: 1.5, background: C.textMut, borderRadius: 1 }} />
+              </div>
+              <div style={{ width: 1, height: 14, background: C.border }} />
+              <span style={{ fontSize: 10, fontWeight: 500, color: C.textMut }}>Unified BI</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 100, height: 24, borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", padding: "0 7px" }}>
+                <span style={{ fontSize: 9, color: C.textMut }}>⌘K Search...</span>
+              </div>
+              <div style={{ width: 24, height: 24, borderRadius: "50%", background: "linear-gradient(135deg, #818cf8, #a78bfa)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 700, color: "#fff" }}>YG</div>
+            </div>
+          </div>
+        </Fade>
 
-            <Sequence from={25}>
-              <ReadingPane delay={0} />
-            </Sequence>
+        {/* CONTENT */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "row", overflow: "hidden" }}>
+
+          {/* THREAD LIST */}
+          <div style={{ width: 240, borderRight: `1px solid ${C.border}`, display: "flex", flexDirection: "column", flexShrink: 0, overflow: "hidden" }}>
+            {/* Thread list header */}
+            <Fade delay={6}>
+              <div style={{ padding: "8px 12px", borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span style={{ fontSize: 12, fontWeight: 600, color: C.text }}>Inbox</span>
+                <span style={{ fontSize: 9, color: C.accent, background: C.accentBg, padding: "1px 7px", borderRadius: 8, fontWeight: 500 }}>12 new</span>
+              </div>
+            </Fade>
+            {/* Filter tabs */}
+            <Fade delay={8}>
+              <div style={{ padding: "5px 10px", borderBottom: `1px solid ${C.border}`, display: "flex", gap: 3 }}>
+                {["All", "Unread", "Urgent"].map((t, i) => (
+                  <span key={t} style={{ fontSize: 9, padding: "2px 8px", borderRadius: 4, background: i === 0 ? C.accentBg : "transparent", color: i === 0 ? C.accent : C.textMut, fontWeight: 500 }}>{t}</span>
+                ))}
+              </div>
+            </Fade>
+            {/* Thread cards */}
+            {THREADS.map((t, i) => (
+              useVisible(12 + i * 7) && (
+                <Fade key={t.from} delay={12 + i * 7} dx={12} dy={0}>
+                  <div style={{
+                    padding: "8px 12px",
+                    borderBottom: `1px solid ${C.border}`,
+                    background: i === 0 ? C.accentBg : "transparent",
+                    borderLeft: i === 0 ? `2px solid ${C.accent}` : "2px solid transparent",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                        {t.unread && <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#3b82f6", flexShrink: 0 }} />}
+                        <span style={{ fontSize: 11, fontWeight: t.unread ? 600 : 400, color: C.text }}>{t.from}</span>
+                        <span style={{ fontSize: 8, color: t.cc, background: `${t.cc}15`, border: `1px solid ${t.cc}20`, padding: "0 4px", borderRadius: 3, fontWeight: 500, lineHeight: "14px" }}>{t.ch}</span>
+                      </div>
+                      <span style={{ fontSize: 9, color: C.textMut }}>{t.time}</span>
+                    </div>
+                    <div style={{ fontSize: 10.5, fontWeight: t.unread ? 600 : 400, color: t.unread ? C.text : C.textSec, marginTop: 2 }}>{t.subj}</div>
+                    <div style={{ fontSize: 10, color: C.textMut, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{t.prev}</div>
+                  </div>
+                </Fade>
+              )
+            ))}
+          </div>
+
+          {/* READING PANE */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+            {/* Reading header */}
+            {useVisible(30) && (
+              <Fade delay={30}>
+                <div style={{ padding: "8px 16px", borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Re: Q3 Renewal Discussion</div>
+                    <div style={{ fontSize: 10, color: C.textMut, marginTop: 1 }}>Sarah Johnson · Acme Corp · 3 messages</div>
+                  </div>
+                  <div style={{ display: "flex", gap: 5 }}>
+                    {["⭐", "✓", "📁"].map((ic) => (
+                      <div key={ic} style={{ width: 26, height: 26, borderRadius: 5, border: `1px solid ${C.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>{ic}</div>
+                    ))}
+                  </div>
+                </div>
+              </Fade>
+            )}
+
+            <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+              {/* Messages */}
+              <div style={{ flex: 1, padding: 14, overflow: "hidden" }}>
+                {/* Email message */}
+                {useVisible(38) && (
+                  <Fade delay={38}>
+                    <div style={{ background: C.card, borderRadius: 8, border: `1px solid ${C.border}`, padding: 14, marginBottom: 10 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                        <div style={{ width: 28, height: 28, borderRadius: "50%", background: `${C.gmail}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 600, color: C.gmail }}>SJ</div>
+                        <div>
+                          <div style={{ fontSize: 11, fontWeight: 600, color: C.text }}>Sarah Johnson</div>
+                          <div style={{ fontSize: 9, color: C.textMut }}>sarah@acmecorp.com · via Gmail · 2m ago</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: 11, lineHeight: 1.65, color: C.textSec }}>
+                        Hi team,<br /><br />
+                        I&apos;ve reviewed the Q3 renewal proposal and I&apos;m excited about the new features. A few quick questions:<br /><br />
+                        1. Can we get volume pricing for 50+ seats?<br />
+                        2. Is the AI copilot included in Enterprise?<br />
+                        3. Timeline for the SAP S/4HANA connector?<br /><br />
+                        Looking forward to discussing.<br />
+                        Best, Sarah
+                      </div>
+                    </div>
+                  </Fade>
+                )}
+
+                {/* AI Reply */}
+                {useVisible(70) && (
+                  <Fade delay={70}>
+                    <div style={{ background: C.card, borderRadius: 8, border: `1px solid ${C.border}`, padding: 12 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", background: "rgba(129,140,248,0.06)", border: "1px solid rgba(129,140,248,0.15)", borderRadius: 6, marginBottom: 8 }}>
+                        <span style={{ fontSize: 9 }}>✨</span>
+                        <span style={{ fontSize: 10, color: C.accent, fontWeight: 500 }}>AI suggested reply</span>
+                      </div>
+                      <div style={{ fontSize: 10.5, lineHeight: 1.6, color: C.textSec }}>
+                        Hi Sarah, thanks for the great questions! 1) Volume pricing starts at 25+ seats. 2) AI Copilot is included in Enterprise. 3) SAP S/4HANA is in beta, GA expected Q4...
+                      </div>
+                    </div>
+                  </Fade>
+                )}
+              </div>
+
+              {/* COPILOT / CONTACT PANEL */}
+              {useVisible(45) && (
+                <Fade delay={45} dx={12} dy={0}>
+                  <div style={{ width: 200, borderLeft: `1px solid ${C.border}`, background: "rgba(255,255,255,0.015)", padding: 12, flexShrink: 0, overflow: "hidden" }}>
+                    <div style={{ fontSize: 9, fontWeight: 600, color: C.textMut, letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: 10 }}>Contact</div>
+
+                    {/* Avatar + name */}
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+                      <div style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(129,140,248,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: C.accent }}>SJ</div>
+                      <div>
+                        <div style={{ fontSize: 11.5, fontWeight: 600, color: C.text }}>Sarah Johnson</div>
+                        <div style={{ fontSize: 9, color: C.textMut }}>VP Ops · Acme Corp</div>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5, marginBottom: 12 }}>
+                      {[{ l: "Emails", v: "24" }, { l: "Deals", v: "$48K" }, { l: "Messages", v: "156" }, { l: "Tasks", v: "8" }].map((s) => (
+                        <div key={s.l} style={{ background: C.card, borderRadius: 5, border: `1px solid ${C.border}`, padding: "5px 7px" }}>
+                          <div style={{ fontSize: 8, color: C.textMut }}>{s.l}</div>
+                          <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{s.v}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Health score */}
+                    <div style={{ marginBottom: 12 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                        <span style={{ fontSize: 9, color: C.textMut }}>Health Score</span>
+                        <span style={{ fontSize: 10, fontWeight: 600, color: C.green }}>85%</span>
+                      </div>
+                      <div style={{ height: 3, borderRadius: 2, background: "rgba(255,255,255,0.05)", overflow: "hidden" }}>
+                        <div style={{ height: "100%", width: `${healthW}%`, borderRadius: 2, background: `linear-gradient(90deg, ${C.green}, ${C.accent})` }} />
+                      </div>
+                    </div>
+
+                    {/* AI Insights */}
+                    <div style={{ fontSize: 9, fontWeight: 600, color: C.textMut, letterSpacing: "0.05em", textTransform: "uppercase" as const, marginBottom: 7 }}>AI Insights</div>
+
+                    {useVisible(80) && (
+                      <Fade delay={80}>
+                        <div style={{ background: "rgba(129,140,248,0.06)", border: "1px solid rgba(129,140,248,0.12)", borderRadius: 6, padding: 8, marginBottom: 6 }}>
+                          <div style={{ fontSize: 9, fontWeight: 600, color: C.accent, marginBottom: 3 }}>Sentiment</div>
+                          <div style={{ fontSize: 10, color: C.textSec, lineHeight: 1.4 }}>
+                            <span style={{ color: C.green, fontWeight: 600 }}>Positive</span> — Strong renewal intent
+                          </div>
+                        </div>
+                      </Fade>
+                    )}
+
+                    {useVisible(95) && (
+                      <Fade delay={95}>
+                        <div style={{ background: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.12)", borderRadius: 6, padding: 8 }}>
+                          <div style={{ fontSize: 9, fontWeight: 600, color: "#fbbf24", marginBottom: 3 }}>Action</div>
+                          <div style={{ fontSize: 10, color: C.textSec, lineHeight: 1.4 }}>Send pricing sheet, schedule call</div>
+                        </div>
+                      </Fade>
+                    )}
+                  </div>
+                </Fade>
+              )}
+            </div>
           </div>
         </div>
       </div>
