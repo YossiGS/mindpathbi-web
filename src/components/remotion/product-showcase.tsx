@@ -9,20 +9,20 @@ import {
 } from "remotion";
 
 const C = {
-  bg: "#0f0f0f",
-  sidebar: "#161616",
-  card: "#1a1a1c",
-  border: "rgba(255,255,255,0.07)",
-  text: "#f4f4f5",
-  textSec: "#a1a1aa",
-  textMut: "#63636e",
-  accent: "#818cf8",
-  accentBg: "rgba(129,140,248,0.1)",
-  gmail: "#EA4335",
-  whatsapp: "#25D366",
-  slack: "#7C3AED",
-  outlook: "#0078D4",
-  green: "#34d399",
+  bg: "#000000",
+  sidebar: "#0a0a0a",
+  card: "#1d1d1f",
+  border: "rgba(255,255,255,0.08)",
+  text: "#f5f5f7",
+  textSec: "#a1a1a6",
+  textMut: "#6e6e73",
+  accent: "#f5f5f7",
+  accentBg: "rgba(255,255,255,0.06)",
+  gmail: "#f5f5f7",
+  whatsapp: "#f5f5f7",
+  slack: "#f5f5f7",
+  outlook: "#f5f5f7",
+  green: "#30d158",
 };
 
 function Fade({ delay, children, dx = 0, dy = 8 }: { delay: number; children: React.ReactNode; dx?: number; dy?: number }) {
