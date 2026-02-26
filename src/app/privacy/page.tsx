@@ -181,10 +181,10 @@ export default function PrivacyPage() {
               If you have questions about this Privacy Policy, please contact
               us at{" "}
               <a
-                href="mailto:privacy@mindpathbi.com"
+                href="mailto:mindpathbi@proton.me"
                 className="text-accent hover:underline"
               >
-                privacy@mindpathbi.com
+                mindpathbi@proton.me
               </a>
               .
             </p>

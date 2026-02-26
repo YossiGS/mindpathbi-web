@@ -25,12 +25,18 @@ export function Footer() {
           </span>
         </div>
 
-        <div className="flex items-center gap-6 text-sm text-muted">
+        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted">
           <Link href="/privacy" className="transition-colors hover:text-foreground">
-            Privacy Policy
+            Privacy
+          </Link>
+          <Link href="/terms" className="transition-colors hover:text-foreground">
+            Terms
+          </Link>
+          <Link href="/cookies" className="transition-colors hover:text-foreground">
+            Cookies
           </Link>
           <a
-            href="mailto:privacy@mindpathbi.com"
+            href="mailto:mindpathbi@proton.me"
             className="transition-colors hover:text-foreground"
           >
             Contact

@@ -67,6 +67,12 @@ export function Navbar() {
           >
             Privacy
           </Link>
+          <Link
+            href="/terms"
+            className="text-sm text-muted transition-colors hover:text-foreground"
+          >
+            Terms
+          </Link>
         </div>
 
         <a
