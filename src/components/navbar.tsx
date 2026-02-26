@@ -76,10 +76,10 @@ export function Navbar() {
         </div>
 
         <a
-          href="#early-access"
+          href="mailto:mindpathbi@proton.me?subject=Early%20Access%20Request&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27m%20interested%20in%20early%20access.%0A%0AThanks!"
           className="rounded-full bg-gradient-to-r from-accent to-accent-bright px-5 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-accent/25"
         >
-          Request Access
+          Contact Us
         </a>
       </div>
     </nav>

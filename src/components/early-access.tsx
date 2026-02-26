@@ -1,19 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "motion/react";
 
 export function EarlyAccess() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-    }
-  };
-
   return (
     <section id="early-access" className="relative py-32 px-6">
       <div
@@ -47,54 +36,33 @@ export function EarlyAccess() {
 
         <p className="mt-4 text-lg text-muted">
           We&apos;re working closely with a small group of early partners to
-          shape the future of SMB business intelligence. Join the waitlist.
+          shape the future of SMB business intelligence.
         </p>
 
-        {!submitted ? (
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="mailto:mindpathbi@proton.me?subject=Early%20Access%20Request&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27m%20interested%20in%20early%20access.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
+            className="glow group inline-flex h-12 items-center gap-2.5 rounded-full bg-gradient-to-r from-accent to-accent-bright px-8 text-sm font-semibold text-white transition-all hover:shadow-xl hover:shadow-accent/20"
           >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your work email"
-              required
-              className="h-12 w-full rounded-full border border-white/10 bg-white/5 px-5 text-sm text-foreground outline-none transition-all placeholder:text-muted/60 focus:border-accent/50 focus:ring-2 focus:ring-accent/20 sm:w-80"
-            />
-            <button
-              type="submit"
-              className="glow h-12 w-full cursor-pointer rounded-full bg-gradient-to-r from-accent to-accent-bright px-8 text-sm font-semibold text-white transition-all hover:shadow-xl hover:shadow-accent/20 sm:w-auto"
-            >
-              Request Access
-            </button>
-          </form>
-        ) : (
-          <motion.div
-            className="mt-8 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-6 py-3 text-sm text-green-400"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="3" />
+              <path d="M2 7l10 6 10-6" />
+            </svg>
+            Get in Touch
             <svg
-              className="h-4 w-4"
+              className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-            You&apos;re on the list! We&apos;ll be in touch soon.
-          </motion.div>
-        )}
+          </a>
+        </div>
 
-        <p className="mt-4 text-xs text-muted/60">
-          No spam. We&apos;ll only reach out when we&apos;re ready for you.
+        <p className="mt-5 text-xs text-muted/60">
+          mindpathbi@proton.me — We reply within 24 hours.
         </p>
       </motion.div>
     </section>

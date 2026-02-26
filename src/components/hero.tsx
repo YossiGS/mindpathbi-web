@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 export function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16">
-      {/* Background effects */}
       <div className="pointer-events-none absolute inset-0 bg-radial-fade" />
       <div className="pointer-events-none absolute inset-0 bg-grid" />
       <div
@@ -60,10 +59,10 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <a
-            href="#early-access"
+            href="mailto:mindpathbi@proton.me?subject=Early%20Access%20Request&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27m%20interested%20in%20early%20access.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
             className="glow group relative inline-flex h-12 items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-bright px-8 text-sm font-semibold text-white transition-all hover:shadow-xl hover:shadow-accent/20"
           >
-            Request Early Access
+            Get in Touch
             <svg
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
               fill="none"
@@ -94,7 +93,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Bottom fade */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
