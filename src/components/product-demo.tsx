@@ -12,6 +12,15 @@ const demos = [
     title: "Every conversation.",
     subtitle: "One timeline.",
     description: "Gmail, Outlook, WhatsApp, Slack — all in one place. AI suggests replies, classifies messages, and surfaces the context you need.",
+    route: "inbox",
+  },
+  {
+    scene: "client360" as const,
+    label: "Client 360",
+    title: "The full picture.",
+    subtitle: "Every touchpoint.",
+    description: "Activity timeline, relationship graph, files, deals, health scores — everything about a contact on one screen. See how every communication, document, and interaction connects.",
+    route: "contacts/sarah-johnson",
   },
   {
     scene: "dashboard" as const,
@@ -19,6 +28,7 @@ const demos = [
     title: "Your pulse.",
     subtitle: "At a glance.",
     description: "Real-time stats, AI insights, activity feed, and health scores. Know exactly what needs your attention the moment you open the app.",
+    route: "",
   },
   {
     scene: "deals" as const,
@@ -26,6 +36,7 @@ const demos = [
     title: "Every deal.",
     subtitle: "Every stage.",
     description: "Visual Kanban pipeline with probability tracking, contact links, and automated stage transitions. Never lose track of revenue.",
+    route: "deals",
   },
 ];
 
@@ -65,7 +76,7 @@ export function ProductDemo() {
         >
           <p className="text-sm font-medium text-muted">See it in action</p>
           <h2 className="mt-3 text-3xl font-bold tracking-[-0.02em] sm:text-4xl lg:text-[48px] lg:leading-[1.08]">
-            Three screens. <span className="text-muted">One platform.</span>
+            Four screens. <span className="text-muted">One platform.</span>
           </h2>
         </motion.div>
 
@@ -92,7 +103,7 @@ export function ProductDemo() {
               </div>
 
               <div className="w-full overflow-hidden rounded-2xl bg-surface lg:w-[62%]">
-                <BrowserChrome url={`app.mindpathbi.com/${demo.scene === "inbox" ? "inbox" : demo.scene === "dashboard" ? "" : "deals"}`} />
+                <BrowserChrome url={`app.mindpathbi.com/${demo.route}`} />
                 <div className="aspect-video w-full">
                   <Suspense fallback={<Loader />}>
                     <RemotionPlayer scene={demo.scene} />

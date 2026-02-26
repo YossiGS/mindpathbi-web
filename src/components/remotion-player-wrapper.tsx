@@ -4,11 +4,13 @@ import { Player } from "@remotion/player";
 import { ProductShowcase } from "./remotion/product-showcase";
 import { DashboardShowcase } from "./remotion/dashboard-showcase";
 import { DealsShowcase } from "./remotion/deals-showcase";
+import { Client360Showcase } from "./remotion/client360-showcase";
 
 const compositions = {
   inbox: ProductShowcase,
   dashboard: DashboardShowcase,
   deals: DealsShowcase,
+  client360: Client360Showcase,
 } as const;
 
 export default function RemotionPlayerWrapper({ scene = "inbox" }: { scene?: keyof typeof compositions }) {
