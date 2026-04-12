@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { ThemeScript } from "./theme-script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,15 +19,16 @@ export const metadata: Metadata = {
   description:
     "One platform for every customer touchpoint. Unified inbox, Client 360, AI copilot, and deep integrations — built for teams that refuse to lose another customer to fragmented tools.",
   keywords: [
-    "business intelligence",
+    "customer service platform",
     "unified inbox",
-    "CRM",
+    "business intelligence",
     "AI copilot",
     "SMB",
-    "customer 360",
+    "client 360",
     "WhatsApp Business",
     "Gmail integration",
     "SAP integration",
+    "omnichannel support",
   ],
   openGraph: {
     title: "MindPath BI — Unified Business Intelligence for SMBs",
@@ -53,11 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.className=t}else if(window.matchMedia("(prefers-color-scheme:light)").matches){document.documentElement.className="light"}}catch(e){}`,
-          }}
-        />
+        <ThemeScript />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
