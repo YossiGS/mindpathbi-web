@@ -152,7 +152,7 @@ export default function TermsPage() {
             <h2 className="mb-3 text-xl font-semibold text-foreground">13. Contact</h2>
             <p>
               For questions about these Terms, contact us at{" "}
-              <a href="mailto:sales@mindpathbi.com" className="text-foreground underline underline-offset-2 hover:opacity-80">sales@mindpathbi.com</a>.
+              <a href="mailto:josef@mindpathbi.com" className="text-foreground underline underline-offset-2 hover:opacity-80">josef@mindpathbi.com</a>.
             </p>
           </section>
         </div>

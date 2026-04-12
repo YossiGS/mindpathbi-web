@@ -10,7 +10,7 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-muted">
           <Link href="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
           <Link href="/terms" className="transition-colors hover:text-foreground">Terms</Link>
-          <a href="mailto:sales@mindpathbi.com" className="transition-colors hover:text-foreground">Contact</a>
+          <a href="mailto:josef@mindpathbi.com" className="transition-colors hover:text-foreground">Contact</a>
           <a href="https://app.mindpathbi.com" className="transition-colors hover:text-foreground">Sign In</a>
         </div>
       </div>

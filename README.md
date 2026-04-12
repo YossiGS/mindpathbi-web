@@ -182,6 +182,6 @@ npm run lint    # ESLint
 
 ## Contact
 
-- **Email:** sales@mindpathbi.com
+- **Email:** josef@mindpathbi.com
 - **App:** app.mindpathbi.com
 - **Main codebase:** /Users/yossigueta/Developer/Unified-BI-System/
