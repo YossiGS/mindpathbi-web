@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { APP_URL, isAppLive } from "@/lib/config";
 
 export function Footer() {
   return (
@@ -12,7 +13,11 @@ export function Footer() {
           <Link href="/terms" className="transition-colors hover:text-foreground">Terms</Link>
           <Link href="/subprocessors" className="transition-colors hover:text-foreground">Subprocessors</Link>
           <a href="mailto:josef@mindpathbi.com" className="transition-colors hover:text-foreground">Contact</a>
-          <Link href="/app" className="transition-colors hover:text-foreground">Sign In</Link>
+          {isAppLive ? (
+            <a href={APP_URL} className="transition-colors hover:text-foreground">Sign In</a>
+          ) : (
+            <Link href="/app" className="transition-colors hover:text-foreground">Sign In</Link>
+          )}
         </div>
       </div>
     </footer>

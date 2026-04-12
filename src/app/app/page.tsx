@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
+import { APP_URL, isAppLive } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "MindPath BI — App",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function AppPage() {
+  if (isAppLive) redirect(APP_URL);
   return (
     <>
       <nav className="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-2xl saturate-150">
