@@ -25,7 +25,7 @@ export default function TermsPage() {
 
       <main className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="text-4xl font-bold tracking-tight">Terms of Service</h1>
-        <p className="mt-2 text-sm text-muted">Last updated: February 26, 2026</p>
+        <p className="mt-2 text-sm text-muted">Last updated: April 2026</p>
 
         <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-muted">
           <p>
@@ -38,7 +38,7 @@ export default function TermsPage() {
             <h2 className="mb-3 text-xl font-semibold text-foreground">1. Acceptance of Terms</h2>
             <p>
               By creating an account or using any part of the Service, you acknowledge that you have read,
-              understood, and agree to be bound by these Terms and our Privacy Policy. If you are using the
+              understood, and agree to be bound by these Terms and our <Link href="/privacy" className="text-foreground underline underline-offset-2 hover:opacity-80">Privacy Policy</Link>. If you are using the
               Service on behalf of an organization, you represent that you have the authority to bind that
               organization to these Terms.
             </p>
@@ -47,10 +47,11 @@ export default function TermsPage() {
           <section>
             <h2 className="mb-3 text-xl font-semibold text-foreground">2. Description of Service</h2>
             <p>
-              MindPath BI provides a unified business intelligence platform that includes communication
-              management, customer relationship tools, AI-powered insights, and third-party integrations.
-              The Service is provided &ldquo;as is&rdquo; and we reserve the right to modify, suspend, or
-              discontinue any feature at any time.
+              MindPath BI provides a unified customer service platform that includes communication
+              management (unified inbox), customer relationship tools (Client 360), AI-powered features
+              (Copilot, suggested replies, summaries, classification, contact insights), workflow automation,
+              and third-party integrations. The Service is provided &ldquo;as is&rdquo; and we reserve the right
+              to modify, suspend, or discontinue any feature at any time.
             </p>
           </section>
 
@@ -74,20 +75,33 @@ export default function TermsPage() {
               <li>Reverse engineer, decompile, or disassemble any part of the Service.</li>
               <li>Use the Service to send spam, phishing messages, or unsolicited communications.</li>
               <li>Upload malicious code, viruses, or harmful content.</li>
+              <li>Paste customer data, thread content, or confidential data into external AI tools outside the MindPath BI platform.</li>
+              <li>Configure any tool to use company or customer data for AI model training.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">5. Data Ownership</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">5. AI Features</h2>
+            <p>The Service includes AI-powered features that process your organization&rsquo;s data to generate assistive outputs (summaries, drafts, routing hints, classification, and similar). Regarding AI features:</p>
+            <ul className="mt-3 list-disc space-y-2 pl-6">
+              <li>All AI-generated customer-facing content should be reviewed by a human before sending.</li>
+              <li>We do <strong className="text-foreground">not</strong> use customer data for AI model training.</li>
+              <li>AI processing is performed by subprocessors disclosed on our <Link href="/subprocessors" className="text-foreground underline underline-offset-2 hover:opacity-80">Subprocessors</Link> page.</li>
+              <li>AI outputs are assistive and not guaranteed to be accurate; you are responsible for verifying AI-generated content before acting on it.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">6. Data Ownership</h2>
             <p>
               You retain all ownership rights to the data you submit through the Service (&ldquo;Your Data&rdquo;).
               You grant us a limited license to process Your Data solely to provide and improve the Service.
-              We will not sell Your Data to third parties or use it for advertising purposes.
+              We will not sell Your Data to third parties, use it for advertising purposes, or use it for AI model training.
             </p>
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">6. Third-Party Integrations</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">7. Third-Party Integrations</h2>
             <p>
               The Service connects to third-party platforms (e.g., Google, Microsoft, Meta).
               Your use of those integrations is also subject to the respective third-party terms of
@@ -96,7 +110,17 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">7. Intellectual Property</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">8. Subprocessors</h2>
+            <p>
+              We use subprocessors to deliver the Service. A current list is available on our{" "}
+              <Link href="/subprocessors" className="text-foreground underline underline-offset-2 hover:opacity-80">Subprocessors</Link> page.
+              Material changes to our subprocessor list are reviewed by our Security and Legal teams before activation.
+              Customer notification follows contractual notice terms.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">9. Intellectual Property</h2>
             <p>
               The Service, including its design, code, features, and documentation, is the intellectual
               property of MindPath BI and is protected by applicable intellectual property laws. You may
@@ -105,7 +129,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">8. Limitation of Liability</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">10. Limitation of Liability</h2>
             <p>
               To the maximum extent permitted by law, MindPath BI shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages, or any loss of profits, data, or
@@ -114,7 +138,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">9. Disclaimer of Warranties</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">11. Disclaimer of Warranties</h2>
             <p>
               The Service is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without warranties of any kind,
               whether express or implied, including but not limited to implied warranties of merchantability,
@@ -123,16 +147,21 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">10. Termination</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">12. Termination</h2>
             <p>
               We may terminate or suspend your access to the Service at any time, with or without cause, upon
-              notice. Upon termination, your right to use the Service ceases immediately. You may request
-              export of Your Data within 30 days of termination.
+              notice. Upon termination:
             </p>
+            <ul className="mt-3 list-disc space-y-2 pl-6">
+              <li>Your right to use the Service ceases immediately.</li>
+              <li><strong className="text-foreground">Days 0–30:</strong> You may request export of Your Data during this migration window.</li>
+              <li><strong className="text-foreground">Days 31–60:</strong> Your Data enters a staged deletion queue.</li>
+              <li><strong className="text-foreground">Days 61–90:</strong> Final purge is completed. A deletion certificate may be issued upon request.</li>
+            </ul>
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">11. Changes to Terms</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">13. Changes to Terms</h2>
             <p>
               We may update these Terms from time to time. We will notify you of material changes via email
               or through the Service. Your continued use after such changes constitutes acceptance of the
@@ -141,7 +170,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">12. Governing Law</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">14. Governing Law</h2>
             <p>
               These Terms shall be governed by and construed in accordance with the laws of the State of
               Israel, without regard to its conflict of law provisions.
@@ -149,7 +178,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">13. Contact</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">15. Contact</h2>
             <p>
               For questions about these Terms, contact us at{" "}
               <a href="mailto:josef@mindpathbi.com" className="text-foreground underline underline-offset-2 hover:opacity-80">josef@mindpathbi.com</a>.
