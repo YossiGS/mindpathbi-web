@@ -23,7 +23,7 @@ export function EarlyAccess() {
 
         <div className="mt-8">
           <a
-            href="mailto:mindpathbi@proton.me?subject=MindPath%20BI%20Inquiry&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27d%20like%20to%20learn%20more.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
+            href="mailto:sales@mindpathbi.com?subject=MindPath%20BI%20Inquiry&body=Hi%20MindPath%20BI%20team%2C%0A%0AI%27d%20like%20to%20learn%20more.%20Here%27s%20a%20bit%20about%20us%3A%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0ACurrent%20tools%3A%20%0A%0AThanks!"
             className="inline-flex rounded-full bg-foreground px-7 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80"
           >
             Get in touch
@@ -31,7 +31,7 @@ export function EarlyAccess() {
         </div>
 
         <p className="mt-5 text-xs text-muted">
-          mindpathbi@proton.me
+          sales@mindpathbi.com
         </p>
       </motion.div>
     </section>

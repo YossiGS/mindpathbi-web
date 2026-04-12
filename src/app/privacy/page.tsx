@@ -115,7 +115,7 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-xl font-semibold text-foreground">8. Contact Us</h2>
             <p>
               If you have questions about this Privacy Policy, please contact us at{" "}
-              <a href="mailto:mindpathbi@proton.me" className="text-foreground underline underline-offset-2 hover:opacity-80">mindpathbi@proton.me</a>.
+              <a href="mailto:sales@mindpathbi.com" className="text-foreground underline underline-offset-2 hover:opacity-80">sales@mindpathbi.com</a>.
             </p>
           </section>
         </div>
