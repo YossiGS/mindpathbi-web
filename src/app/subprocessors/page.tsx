@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Subprocessors — MindPath BI",
-  description: "Third-party subprocessors used by MindPath BI to deliver the service.",
+  description: "Third-party subprocessors and service providers used by MindPath BI to deliver the service.",
 };
 
 export default function SubprocessorsPage() {
@@ -24,84 +24,131 @@ export default function SubprocessorsPage() {
       </nav>
 
       <main className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight">Subprocessors</h1>
+        <h1 className="text-4xl font-bold tracking-tight">Subprocessors &amp; Service Providers</h1>
         <p className="mt-2 text-sm text-muted">Last updated: April 2026</p>
 
         <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-muted">
           <p>
-            MindPath BI uses the following third-party subprocessors to deliver the service. This page is
+            MindPath BI uses the following third-party subprocessors and service providers to deliver the service. This page is
             maintained as part of our commitment to transparency under GDPR and applicable data protection regulations.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="pb-2 pr-4 font-semibold text-foreground">Subprocessor</th>
-                  <th className="pb-2 pr-4 font-semibold text-foreground">Purpose</th>
-                  <th className="pb-2 pr-4 font-semibold text-foreground">Data Categories</th>
-                  <th className="pb-2 font-semibold text-foreground">Region</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">Vercel</td>
-                  <td className="py-3 pr-4">Frontend hosting, edge CDN</td>
-                  <td className="py-3 pr-4">App metadata, request metadata</td>
-                  <td className="py-3">Multi-region</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">OVH</td>
-                  <td className="py-3 pr-4">Backend infrastructure, database, object storage</td>
-                  <td className="py-3 pr-4">All application data</td>
-                  <td className="py-3">EU (France)</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">Google (Gemini)</td>
-                  <td className="py-3 pr-4">Primary AI provider</td>
-                  <td className="py-3 pr-4">Thread content, KB documents (processed, not stored)</td>
-                  <td className="py-3">US/EU</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">Brevo</td>
-                  <td className="py-3 pr-4">Transactional email delivery</td>
-                  <td className="py-3 pr-4">Email addresses, notification content</td>
-                  <td className="py-3">EU</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">Sentry</td>
-                  <td className="py-3 pr-4">Error tracking</td>
-                  <td className="py-3 pr-4">Stack traces, request metadata (no PII)</td>
-                  <td className="py-3">US</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">GitHub</td>
-                  <td className="py-3 pr-4">Source code hosting, CI/CD</td>
-                  <td className="py-3 pr-4">Source code, CI logs (no customer data)</td>
-                  <td className="py-3">US</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">ClamAV (self-hosted)</td>
-                  <td className="py-3 pr-4">Malware scanning</td>
-                  <td className="py-3 pr-4">File content (scanned in-memory, not stored)</td>
-                  <td className="py-3">Self-hosted</td>
-                </tr>
-                <tr>
-                  <td className="py-3 pr-4 font-medium text-foreground">Docker Hub</td>
-                  <td className="py-3 pr-4">Container image registry</td>
-                  <td className="py-3 pr-4">Container images (no customer data)</td>
-                  <td className="py-3">US</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">Subprocessors</h2>
+            <p>These entities process customer personal data on our behalf to provide the Service:</p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Subprocessor</th>
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Purpose</th>
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Data Categories</th>
+                    <th className="pb-2 font-semibold text-foreground">Region</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">Vercel</td>
+                    <td className="py-3 pr-4">Frontend hosting, edge CDN</td>
+                    <td className="py-3 pr-4">App metadata, request metadata</td>
+                    <td className="py-3">Multi-region</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">OVH</td>
+                    <td className="py-3 pr-4">Backend infrastructure, database, object storage</td>
+                    <td className="py-3 pr-4">All application data</td>
+                    <td className="py-3">EU (France)</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">Google (Gemini)</td>
+                    <td className="py-3 pr-4">Primary AI provider</td>
+                    <td className="py-3 pr-4">Thread content, KB documents (processed, not stored)</td>
+                    <td className="py-3">US/EU</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">Brevo</td>
+                    <td className="py-3 pr-4">Transactional email delivery</td>
+                    <td className="py-3 pr-4">Email addresses, notification content</td>
+                    <td className="py-3">EU</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">Sentry</td>
+                    <td className="py-3 pr-4">Error tracking</td>
+                    <td className="py-3 pr-4">Stack traces, request metadata (no PII)</td>
+                    <td className="py-3">US</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">ClamAV (self-hosted)</td>
+                    <td className="py-3 pr-4">Malware scanning</td>
+                    <td className="py-3 pr-4">File content (scanned in-memory, not stored)</td>
+                    <td className="py-3">Self-hosted</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">Service Providers</h2>
+            <p>These entities provide infrastructure and development services but do not process customer personal data:</p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Provider</th>
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Purpose</th>
+                    <th className="pb-2 font-semibold text-foreground">Region</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">GitHub</td>
+                    <td className="py-3 pr-4">Source code hosting, CI/CD</td>
+                    <td className="py-3">US</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">Docker Hub</td>
+                    <td className="py-3 pr-4">Container image registry</td>
+                    <td className="py-3">US</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-medium text-foreground">Vercel Analytics</td>
+                    <td className="py-3 pr-4">Privacy-friendly, anonymous website analytics</td>
+                    <td className="py-3">Multi-region</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">Vendor Review Cadence</h2>
+            <p>We maintain a formal vendor risk management program:</p>
+            <ul className="mt-3 list-disc space-y-2 pl-6">
+              <li><strong className="text-foreground">Critical subprocessors</strong> (infrastructure, AI, database): reviewed <strong className="text-foreground">semi-annually</strong>.</li>
+              <li><strong className="text-foreground">Important subprocessors</strong> (email delivery, error tracking): reviewed <strong className="text-foreground">annually</strong>.</li>
+              <li><strong className="text-foreground">Standard service providers</strong> (container registry, development tools): reviewed at <strong className="text-foreground">renewal or biennially</strong>.</li>
+            </ul>
+            <p className="mt-3">Reviews assess security posture, compliance certifications, data handling practices, and business continuity capabilities.</p>
+          </section>
 
           <section>
             <h2 className="mb-3 text-xl font-semibold text-foreground">Change Management</h2>
             <p>
               Material changes to our subprocessor list are reviewed by our Security and Legal teams before
-              activation. Customer notification follows contractual notice terms as outlined in your Data
-              Processing Agreement (DPA).
+              activation. We provide at least <strong className="text-foreground">10 calendar days&rsquo;</strong> advance
+              notice before engaging a new subprocessor. Customer notification follows contractual notice terms
+              as outlined in your{" "}
+              <Link href="/dpa" className="text-foreground underline underline-offset-2 hover:opacity-80">Data Processing Addendum</Link>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">Receive Change Notifications</h2>
+            <p>
+              To receive advance email notifications when we add or change subprocessors, contact us at{" "}
+              <a href="mailto:josef@mindpathbi.com?subject=Subprocessor%20Change%20Notifications&body=Please%20add%20me%20to%20the%20subprocessor%20change%20notification%20list.%0A%0AOrganization%3A%20%0AContact%20email%3A%20" className="text-foreground underline underline-offset-2 hover:opacity-80">josef@mindpathbi.com</a> with
+              the subject &ldquo;Subprocessor Change Notifications.&rdquo;
             </p>
           </section>
 

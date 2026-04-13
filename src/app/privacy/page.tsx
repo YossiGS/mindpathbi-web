@@ -58,12 +58,38 @@ export default function PrivacyPage() {
               <li><strong className="text-foreground">Provide AI-assisted customer service</strong> — Generate summaries, drafts, routing hints, and similar assistive outputs grounded in your organization&rsquo;s data and settings.</li>
               <li><strong className="text-foreground">Analytics and improvement</strong> — Understand product usage and reliability in aggregate or per-tenant ways as configured.</li>
               <li><strong className="text-foreground">Send service-related notices</strong> — Deliver transactional emails, support messages, and security alerts.</li>
+              <li><strong className="text-foreground">Comply with legal obligations</strong> — Respond to lawful requests, enforce our terms, and protect rights and safety.</li>
             </ul>
             <p className="mt-3">We do not use your data to run third-party advertising for unrelated companies. We process data as described in our agreements with your organization and as required by applicable law.</p>
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">3. Data Sharing</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">3. Legal Basis for Processing (GDPR)</h2>
+            <p>For users in the European Economic Area, United Kingdom, and Switzerland, we process personal data on the following legal bases:</p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Processing Activity</th>
+                    <th className="pb-2 pr-4 font-semibold text-foreground">Legal Basis</th>
+                    <th className="pb-2 font-semibold text-foreground">GDPR Article</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  <tr><td className="py-2 pr-4">Service delivery (inbox, Client 360, workflows)</td><td className="py-2 pr-4">Performance of contract</td><td className="py-2">Art. 6(1)(b)</td></tr>
+                  <tr><td className="py-2 pr-4">AI-assisted features (Copilot, classification, summaries)</td><td className="py-2 pr-4">Performance of contract</td><td className="py-2">Art. 6(1)(b)</td></tr>
+                  <tr><td className="py-2 pr-4">Account and billing management</td><td className="py-2 pr-4">Performance of contract</td><td className="py-2">Art. 6(1)(b)</td></tr>
+                  <tr><td className="py-2 pr-4">Security monitoring and audit logs</td><td className="py-2 pr-4">Legitimate interest (security)</td><td className="py-2">Art. 6(1)(f)</td></tr>
+                  <tr><td className="py-2 pr-4">Product analytics (aggregate)</td><td className="py-2 pr-4">Legitimate interest (improvement)</td><td className="py-2">Art. 6(1)(f)</td></tr>
+                  <tr><td className="py-2 pr-4">Tax, legal, and regulatory compliance</td><td className="py-2 pr-4">Legal obligation</td><td className="py-2">Art. 6(1)(c)</td></tr>
+                  <tr><td className="py-2 pr-4">Marketing communications (if applicable)</td><td className="py-2 pr-4">Consent</td><td className="py-2">Art. 6(1)(a)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">4. Data Sharing</h2>
             <ul className="mt-3 list-disc space-y-2 pl-6">
               <li><strong className="text-foreground">We do not sell your personal information.</strong></li>
               <li>We may use <strong className="text-foreground">subprocessors</strong> (hosting, email delivery, AI providers, observability tools) strictly to provide the service. A current list is maintained on our <Link href="/subprocessors" className="text-foreground underline underline-offset-2 hover:opacity-80">Subprocessors</Link> page.</li>
@@ -73,7 +99,18 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">4. Cookies &amp; Analytics</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">5. International Data Transfers</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-6">
+              <li><strong className="text-foreground">Primary processing:</strong> Application data is hosted in the <strong className="text-foreground">European Union (OVH, France)</strong>.</li>
+              <li><strong className="text-foreground">US subprocessors:</strong> Certain subprocessors (Sentry for error tracking, GitHub for CI/CD) are located in the United States. Transfers to these subprocessors are governed by the <strong className="text-foreground">EU Standard Contractual Clauses (SCCs)</strong>.</li>
+              <li><strong className="text-foreground">AI processing:</strong> AI inference via Google Gemini may be processed in the US or EU. Google&rsquo;s data processing terms apply.</li>
+              <li>We do not currently participate in the EU-US Data Privacy Framework (DPF). This section will be updated if certification is obtained.</li>
+              <li>For full transfer details, see our <Link href="/dpa" className="text-foreground underline underline-offset-2 hover:opacity-80">Data Processing Addendum</Link>.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">6. Cookies &amp; Analytics</h2>
             <p>
               This website uses <strong className="text-foreground">Vercel Web Analytics</strong>, a privacy-friendly
               analytics service. It collects anonymous, aggregated page-view data. It does not use cookies, does not
@@ -84,10 +121,15 @@ export default function PrivacyPage() {
               The MindPath BI application uses only <strong className="text-foreground">essential session cookies</strong> required
               for authentication. We do not use advertising cookies, cross-site tracking, or fingerprinting on any of our properties.
             </p>
+            <p className="mt-3">
+              <strong className="text-foreground">Do Not Track:</strong> We do not respond to &ldquo;Do Not Track&rdquo;
+              browser signals because no uniform standard for processing these signals has been adopted.
+              Regardless, our tracking practices are minimal as described above.
+            </p>
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">5. Your Rights</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">7. Your Rights</h2>
             <p>Depending on where you live, you may have the following rights:</p>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-left text-sm">
@@ -102,7 +144,9 @@ export default function PrivacyPage() {
                   <tr><td className="py-2 pr-4 font-medium text-foreground">Access</td><td className="py-2 pr-4">Art. 15</td><td className="py-2">Understand what data we hold about you.</td></tr>
                   <tr><td className="py-2 pr-4 font-medium text-foreground">Rectification</td><td className="py-2 pr-4">Art. 16</td><td className="py-2">Request correction of inaccurate personal data.</td></tr>
                   <tr><td className="py-2 pr-4 font-medium text-foreground">Erasure</td><td className="py-2 pr-4">Art. 17</td><td className="py-2">Request deletion, subject to legal and contractual limits.</td></tr>
+                  <tr><td className="py-2 pr-4 font-medium text-foreground">Restriction</td><td className="py-2 pr-4">Art. 18</td><td className="py-2">Request restriction of processing in certain circumstances.</td></tr>
                   <tr><td className="py-2 pr-4 font-medium text-foreground">Portability</td><td className="py-2 pr-4">Art. 20</td><td className="py-2">Receive certain data in a structured, machine-readable form.</td></tr>
+                  <tr><td className="py-2 pr-4 font-medium text-foreground">Object</td><td className="py-2 pr-4">Art. 21</td><td className="py-2">Object to processing based on legitimate interest.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -113,7 +157,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">6. Additional Disclosures for California Residents (CCPA/CPRA)</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">8. Additional Disclosures for California Residents (CCPA/CPRA)</h2>
             <p>If you are a California resident, the California Consumer Privacy Act (as amended by the CPRA) provides additional rights.</p>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-left text-sm">
@@ -146,7 +190,17 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">7. Third-Party Integrations</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">9. Children</h2>
+            <p>
+              The Service is not directed to persons under the age of <strong className="text-foreground">18</strong>.
+              We do not knowingly collect personal information from anyone under 18. If we become aware that
+              we have collected personal information from a person under 18, we will take steps to delete
+              that information promptly.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">10. Third-Party Integrations</h2>
             <p>Our platform integrates with third-party services including Meta (WhatsApp Business), Google (Gmail), Microsoft (Outlook), and others. When you connect these services:</p>
             <ul className="mt-3 list-disc space-y-2 pl-6">
               <li>We only request permissions necessary for the features you use.</li>
@@ -156,7 +210,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">8. Data Security</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">11. Data Security</h2>
             <p>We implement industry-standard security measures including:</p>
             <ul className="mt-3 list-disc space-y-2 pl-6">
               <li>Encryption of sensitive credentials at rest using Fernet symmetric encryption.</li>
@@ -167,7 +221,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">9. Data Retention</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">12. Data Retention</h2>
             <p>We retain your data for as long as your account is active or as needed to provide services. Upon termination:</p>
             <ul className="mt-3 list-disc space-y-2 pl-6">
               <li><strong className="text-foreground">Days 0–30:</strong> Export and migration window — you can request a full data export.</li>
@@ -199,7 +253,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">10. Data Subject Access Requests</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">13. Data Subject Access Requests</h2>
             <p>You may submit a data subject access request (DSAR) for access, deletion, rectification, or portability. Our response targets:</p>
             <ul className="mt-3 list-disc space-y-2 pl-6">
               <li><strong className="text-foreground">Acknowledgment:</strong> Within 3 business days.</li>
@@ -209,7 +263,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">11. Changes</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">14. Changes</h2>
             <p>
               We may update this notice from time to time. The &ldquo;Last updated&rdquo; date at the top will change when we do;
               material changes may be communicated through the product or your organization.
@@ -217,7 +271,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">12. Contact Us</h2>
+            <h2 className="mb-3 text-xl font-semibold text-foreground">15. Contact Us</h2>
             <p>
               If you have questions about this Privacy Policy, please contact us at{" "}
               <a href="mailto:josef@mindpathbi.com" className="text-foreground underline underline-offset-2 hover:opacity-80">josef@mindpathbi.com</a>.
