@@ -30,16 +30,16 @@ export function SourceChip({ filename, variant = "fixed", delay = 0, className }
         className,
       )}
     >
-      <span className="text-[var(--color-accent)]">[</span>
-      <span className="text-[var(--color-muted-2)]">SOURCE:</span>
+      <span className="flex-none text-[var(--color-accent)]">[</span>
+      <span className="flex-none text-[var(--color-muted-2)]">SOURCE:</span>
       <motion.span
-        className="text-[var(--color-ink)]"
+        className="min-w-0 flex-1 truncate text-[var(--color-ink)]"
         animate={{ opacity: revealed ? 1 : 0.6 }}
         transition={{ duration: 0.2 }}
       >
         {revealed ? filename : mask}
       </motion.span>
-      <span className="text-[var(--color-accent)]">]</span>
+      <span className="flex-none text-[var(--color-accent)]">]</span>
     </span>
   );
 }

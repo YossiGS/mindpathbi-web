@@ -63,30 +63,65 @@ export const ALL_PIPELINE_NODES = [
   ...SYSTEM_NODES,
 ];
 
-/** Three outbound "unified threads" exiting the MindPath node. */
+/** Three outbound "unified threads" exiting the MindPath node.
+ *
+ * Rendered as a fan-open deck of three stacked cards on the right of the
+ * radial diagram — back card CLASSIFIED, mid GROUNDED, front DRAFTED. Each
+ * card carries its own micro-layer of content (rows) so the stack reads
+ * as real stages of one artifact rather than three separate outputs.
+ */
 export const OUTPUT_THREADS = [
   {
     id: "classify",
+    num: "01",
     title: "Classified",
     caption: "intent + priority",
+    rows: [
+      { label: "intent", value: "quote" },
+      { label: "priority", value: "high" },
+      { label: "confidence", value: "0.94" },
+    ],
   },
   {
     id: "retrieve",
+    num: "02",
     title: "Grounded",
     caption: "sources cited",
+    rows: [
+      { label: "src", value: "catalog.md" },
+      { label: "src", value: "pricing.md" },
+      { label: "src", value: "policy.md" },
+    ],
   },
   {
     id: "act",
+    num: "03",
     title: "Drafted",
     caption: "reply queued",
+    rows: [
+      { label: "draft", value: "Hey Amit, happy" },
+      { label: "line", value: "walnut 3-pack" },
+      { label: "line", value: "food-safe · ok" },
+    ],
   },
 ] as const;
 
-/** Ring radius + center for SVG layout — consumed by the component. */
+/** Ring radius + center for SVG layout — consumed by the component.
+ *
+ * Center is offset left of the viewBox's horizontal midpoint (960/2 = 480)
+ * to leave room on the right for the exploded output-stack assembly. The
+ * ring and its category labels (CHANNELS / KNOWLEDGE / SYSTEMS) need
+ * clearance outside the ring's right edge so the SYSTEMS arc callout
+ * doesn't crash into the top slab of the stack.
+ *
+ * viewBox is intentionally taller (960×600) than a naive aspect ratio so
+ * the SVG — rendered with h-auto w-full preserveAspectRatio="xMidYMid
+ * meet" — scales up inside the exhibit card instead of leaving dead
+ * vertical space. Every SVG unit inside the diagram reads larger. */
 export const PIPELINE_LAYOUT = {
-  viewBox: { w: 960, h: 520 },
-  center: { x: 420, y: 260 },
-  radius: 200,
+  viewBox: { w: 960, h: 600 },
+  center: { x: 376, y: 300 },
+  radius: 226,
   outputX: 780,
   outputSpacing: 90,
 };

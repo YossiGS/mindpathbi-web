@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ClassifiedTag } from "@/components/brand/classified-tag";
 import { WordRotator } from "@/components/brand/word-rotator";
-import { UnifiedPipelineDiagram, VerticalPipelineStream } from "@/components/mocks/unified-pipeline";
+import { UnifiedPipelineDiagram } from "@/components/mocks/unified-pipeline";
 
 export function Hero() {
   const prefersReduced = useReducedMotion() ?? false;
@@ -104,11 +104,13 @@ export function Hero() {
               <span>[EXHIBIT A]</span>
               <span>THE UNIFIED INBOX · SCHEMATIC</span>
             </div>
-            <div className="mt-3 hidden md:block">
+            {/* [CHANGED 2026-04-19] Render the compact schematic at every
+                breakpoint. The old mobile fallback (<VerticalPipelineStream />)
+                produced a 1200px tall channel list on small screens; the SVG
+                here has w-full + h-auto + preserveAspectRatio so it scales
+                down cleanly instead. */}
+            <div className="mt-3">
               <UnifiedPipelineDiagram />
-            </div>
-            <div className="mt-3 md:hidden">
-              <VerticalPipelineStream />
             </div>
           </motion.div>
         </div>

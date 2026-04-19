@@ -45,7 +45,14 @@ export function AIPipelineMock() {
         How one message moves through
       </Eyebrow>
 
-      <div ref={ref} className="relative mt-10 min-h-[200vh]">
+      {/* [CHANGED 2026-04-19] `min-h-[200vh]` is the scroll-runway for the
+          desktop sticky pipeline — the outer div is 2× viewport so the
+          inner `md:sticky md:top-24` content stays pinned while the user
+          scrolls through the stage progression. On mobile there is no
+          sticky (see `md:sticky` below), so a 200vh reservation just
+          leaves ~1000px of blank paper-2 under the vertical stage list.
+          Scope the runway to md:+ only. */}
+      <div ref={ref} className="relative mt-10 md:min-h-[200vh]">
         <div className="md:sticky md:top-24">
           {/* ---- Desktop: horizontal pipeline ---- */}
           <div className="hidden md:block">

@@ -248,17 +248,17 @@ export function InboxMock({
       )}
     >
       {/* Header ─────────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between border-b border-[var(--color-rule)] bg-[var(--color-paper-2)] px-4 py-2.5">
-        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
-          <span className="relative flex h-2 w-2">
+      <div className="flex items-center justify-between gap-2 border-b border-[var(--color-rule)] bg-[var(--color-paper-2)] px-3 py-2 md:px-4 md:py-2.5">
+        <div className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--color-muted)] md:tracking-[0.14em]">
+          <span className="relative flex h-2 w-2 flex-none">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-status-ok)] opacity-40" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-status-ok)]" />
           </span>
-          <span className="text-[var(--color-ink)]">Inbox</span>
-          <span className="text-[var(--color-muted-2)]">·</span>
-          <span>Unified</span>
+          <span className="flex-none text-[var(--color-ink)]">Inbox</span>
+          <span className="flex-none text-[var(--color-muted-2)]">·</span>
+          <span className="truncate">Unified</span>
         </div>
-        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-muted-2)]">
+        <div className="flex flex-none items-center gap-2 font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--color-muted-2)] md:tracking-[0.14em]">
           <span className="tabular-nums">
             <span className="text-[var(--color-ink)]">{THREADS.length}</span>{" "}
             open
@@ -298,7 +298,7 @@ export function InboxMock({
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.35, delay: i * 0.045 }}
                 className={cn(
-                  "flex items-start gap-3 px-4 py-3",
+                  "flex items-start gap-2.5 px-3 py-2.5 md:gap-3 md:px-4 md:py-3",
                   t.unread
                     ? "bg-[var(--color-paper)]"
                     : "bg-[var(--color-paper-2)]/40",
@@ -307,7 +307,7 @@ export function InboxMock({
                 {/* Channel tile */}
                 <span
                   aria-hidden
-                  className="mt-0.5 inline-flex h-7 w-7 flex-none items-center justify-center rounded-[3px] border border-[var(--color-rule)] bg-[var(--color-paper-2)] text-[var(--color-ink-soft)]"
+                  className="mt-0.5 inline-flex h-6 w-6 flex-none items-center justify-center rounded-[3px] border border-[var(--color-rule)] bg-[var(--color-paper-2)] text-[var(--color-ink-soft)] md:h-7 md:w-7"
                 >
                   <ChannelLogo
                     name={t.channel}
@@ -332,6 +332,12 @@ export function InboxMock({
                     <span className="ml-auto flex-none font-mono text-[10px] tabular-nums text-[var(--color-muted-2)]">
                       {t.ts}
                     </span>
+                    {/* [CHANGED 2026-04-19] TAG pill is hidden from row 1 on
+                        mobile (too much pressure on narrow widths caused the
+                        right edge of each row to clip inside the card). On
+                        mobile it renders at the end of row 2 alongside the
+                        draft % — there's almost always room there since the
+                        preview truncates. */}
                     <motion.span
                       initial={{ opacity: 0, y: -2 }}
                       animate={{
@@ -340,7 +346,7 @@ export function InboxMock({
                       }}
                       transition={{ duration: 0.3 }}
                       className={cn(
-                        "flex-none inline-flex items-center gap-1 rounded-[3px] border px-1.5 py-[2px] font-mono text-[9px] uppercase tracking-[0.12em]",
+                        "hidden flex-none md:inline-flex items-center gap-1 rounded-[3px] border px-1.5 py-[2px] font-mono text-[9px] uppercase tracking-[0.12em]",
                         TAG_TONE[t.tag].pill,
                       )}
                     >
@@ -354,9 +360,9 @@ export function InboxMock({
                     </motion.span>
                   </div>
 
-                  {/* Row 2 · preview + draft status */}
-                  <div className="mt-1 flex items-baseline gap-3">
-                    <p className="min-w-0 flex-1 truncate text-[12.5px] leading-[1.45] text-[var(--color-muted)]">
+                  {/* Row 2 · preview + (mobile-only tag) + draft status */}
+                  <div className="mt-1 flex items-baseline gap-2 md:gap-3">
+                    <p className="min-w-0 flex-1 truncate text-[12px] leading-[1.45] text-[var(--color-muted)] md:text-[12.5px]">
                       <SegmentLine
                         segments={t.preview}
                         variant={variant}
@@ -364,10 +370,30 @@ export function InboxMock({
                       />
                     </p>
                     <motion.span
+                      initial={{ opacity: 0, y: -2 }}
+                      animate={{
+                        opacity: classified ? 1 : 0,
+                        y: classified ? 0 : -2,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className={cn(
+                        "inline-flex flex-none items-center gap-1 self-center rounded-[3px] border px-1 py-[1px] font-mono text-[8.5px] uppercase tracking-[0.1em] md:hidden",
+                        TAG_TONE[t.tag].pill,
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "h-1 w-1 rounded-full",
+                          TAG_TONE[t.tag].dot,
+                        )}
+                      />
+                      {t.tag}
+                    </motion.span>
+                    <motion.span
                       initial={{ opacity: 0 }}
                       animate={{ opacity: classified ? 1 : 0 }}
                       transition={{ duration: 0.35, delay: 0.1 }}
-                      className="flex-none font-mono text-[9.5px] uppercase tracking-[0.14em] tabular-nums"
+                      className="flex-none font-mono text-[9px] uppercase tracking-[0.1em] tabular-nums md:text-[9.5px] md:tracking-[0.14em]"
                     >
                       {t.draft !== undefined ? (
                         <span className="inline-flex items-center gap-1 text-[var(--color-accent-ink)]">
@@ -390,18 +416,31 @@ export function InboxMock({
       </ul>
 
       {/* Footer ─ AI classifier status ──────────────────────────────── */}
-      <div className="mt-auto border-t border-[var(--color-rule)] bg-[var(--color-paper-2)] px-4 py-2.5">
-        <div className="flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.14em]">
-          <div className="flex items-center gap-2 text-[var(--color-muted)]">
-            <span className="relative inline-flex h-1.5 w-1.5">
+      {/* [CHANGED 2026-04-19] Every `span` inside the two status rows is
+          `min-w-0` + truncate-friendly, and the labels are shorter on
+          mobile. Before: the uppercase tracked text
+          ("CLASSIFYING INTENT + PRIORITY" / "N CLASSIFIED · M DRAFTED · 1
+          ESCALATED") forms a single long line with no shrink permission,
+          which pushed the card's intrinsic width past the grid column on
+          narrow viewports and caused the right edge to be clipped by the
+          section's overflow-hidden. */}
+      <div className="mt-auto border-t border-[var(--color-rule)] bg-[var(--color-paper-2)] px-3 py-2 md:px-4 md:py-2.5">
+        <div className="flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.1em] md:gap-3 md:tracking-[0.14em]">
+          <div className="flex min-w-0 items-center gap-2 text-[var(--color-muted)]">
+            <span className="relative inline-flex h-1.5 w-1.5 flex-none">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
             </span>
-            <span className="text-[var(--color-ink)]">AI</span>
-            <span className="text-[var(--color-muted-2)]">·</span>
-            <span>Classifying intent + priority</span>
+            <span className="flex-none text-[var(--color-ink)]">AI</span>
+            <span className="flex-none text-[var(--color-muted-2)]">·</span>
+            <span className="min-w-0 truncate">
+              <span className="md:hidden">Classifying</span>
+              <span className="hidden md:inline">
+                Classifying intent + priority
+              </span>
+            </span>
           </div>
-          <span className="tabular-nums text-[var(--color-ink)]">
+          <span className="flex-none tabular-nums text-[var(--color-ink)]">
             {Math.round(effectiveProgress * 100)}%
           </span>
         </div>
@@ -412,21 +451,21 @@ export function InboxMock({
             transition={{ duration: 0.5, ease: "easeOut" }}
           />
         </div>
-        <div className="mt-2 flex items-center gap-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-[var(--color-muted-2)]">
+        <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--color-muted-2)] md:gap-x-3 md:text-[9.5px] md:tracking-[0.14em]">
           <span className="tabular-nums">
             <span className="text-[var(--color-ink-soft)]">
               {classifiedCount}
             </span>{" "}
             classified
           </span>
-          <span>·</span>
+          <span aria-hidden>·</span>
           <span className="tabular-nums">
             <span className="text-[var(--color-accent-ink)]">
               {draftedCount}
             </span>{" "}
             drafted
           </span>
-          <span>·</span>
+          <span aria-hidden>·</span>
           <span className="tabular-nums">
             <span className="text-[var(--color-ink-soft)]">1</span> escalated
           </span>

@@ -61,23 +61,31 @@ export function Integrations() {
         </h2>
       </div>
 
-      <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+      {/* [CHANGED 2026-04-19] Three lanes stay side-by-side at every
+          breakpoint — previously the grid collapsed to a single column
+          < md, which produced three long vertical stacks. Mobile rows
+          adopt a compact shape: smaller 24px logo tile, the descriptor
+          line is hidden, and the LIVE/SOON chip collapses to just its
+          status dot. At md+ everything returns to the full desktop row. */}
+      <div className="mt-10 grid grid-cols-3 gap-2 md:gap-8">
         {LANES.map((lane) => {
           const rows = CONNECTORS.filter((c) => c.kind === lane.filter);
           return (
             <div
               key={lane.code}
-              className="flex flex-col gap-4 border-t border-[var(--color-rule)] pt-5 md:border-0 md:pt-0"
+              className="flex min-w-0 flex-col gap-3 border-t border-[var(--color-rule)] pt-4 md:gap-4 md:border-0 md:pt-0"
             >
               <div className="flex items-baseline justify-between">
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                <div className="min-w-0">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--color-accent)] md:text-[10px] md:tracking-[0.18em]">
                     [LANE {lane.code}]
                   </div>
-                  <div className="mt-1 text-base font-semibold tracking-tight text-[var(--color-ink)]">
+                  <div className="mt-1 truncate text-[13px] font-semibold tracking-tight text-[var(--color-ink)] md:text-base">
                     {lane.label}
                   </div>
-                  <div className="text-xs text-[var(--color-muted)]">{lane.sub}</div>
+                  <div className="hidden text-xs text-[var(--color-muted)] md:block">
+                    {lane.sub}
+                  </div>
                 </div>
               </div>
 
@@ -85,25 +93,30 @@ export function Integrations() {
                 {rows.map((c) => (
                   <li
                     key={c.name}
-                    className="flex items-center gap-3 px-3 py-2.5"
+                    className="flex items-center gap-2 px-2 py-2 md:gap-3 md:px-3 md:py-2.5"
                   >
-                    <span className="inline-flex h-8 w-8 items-center justify-center border border-[var(--color-rule)] bg-[var(--color-paper-2)] text-[var(--color-muted)]">
+                    <span className="inline-flex h-6 w-6 flex-none items-center justify-center border border-[var(--color-rule)] bg-[var(--color-paper-2)] text-[var(--color-muted)] md:h-8 md:w-8">
                       <ChannelLogo
                         name={c.logo}
-                        style={{ width: 14, height: 14 }}
+                        style={{ width: 12, height: 12 }}
+                        className="md:!h-[14px] md:!w-[14px]"
                       />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-medium text-[var(--color-ink)]">
+                      <div className="truncate text-[12px] font-medium text-[var(--color-ink)] md:text-sm">
                         {c.name}
                       </div>
-                      <div className="truncate font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                      <div className="truncate font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--color-muted)] md:text-[10px] md:tracking-[0.14em]">
                         {c.desc}
                       </div>
                     </div>
+                    {/* Status — desktop keeps the LIVE/SOON text, mobile
+                        collapses to just the coloured dot so 3 lanes can
+                        co-exist on a narrow viewport. */}
                     <span
+                      title={c.status === "live" ? "LIVE" : "SOON"}
                       className={
-                        "inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.18em] " +
+                        "inline-flex flex-none items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.18em] " +
                         (c.status === "live"
                           ? "text-[var(--color-status-ok)]"
                           : "text-[var(--color-muted-2)]")
@@ -117,7 +130,9 @@ export function Integrations() {
                             : "bg-[var(--color-muted-2)]")
                         }
                       />
-                      {c.status === "live" ? "LIVE" : "SOON"}
+                      <span className="hidden md:inline">
+                        {c.status === "live" ? "LIVE" : "SOON"}
+                      </span>
                     </span>
                   </li>
                 ))}

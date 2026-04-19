@@ -93,7 +93,12 @@ export function FieldReport() {
 
       <div ref={ref} className="relative mt-10 grid gap-8 md:grid-cols-12">
         {/* Narrative column */}
-        <div className="md:col-span-6">
+        {/* [CHANGED 2026-04-19] min-w-0 on both grid children — without it,
+            grid items default to `min-width: auto`, which means intrinsic
+            content width (long uppercase tracked labels inside the inbox
+            mock) can push a column wider than its allocation and blow out
+            the row on narrow viewports. */}
+        <div className="min-w-0 md:col-span-6">
           <ol className="flex flex-col gap-10 md:gap-14">
             {BEATS.map((b, i) => (
               <motion.li
@@ -124,7 +129,7 @@ export function FieldReport() {
         </div>
 
         {/* Sticky inbox mock */}
-        <div className="md:col-span-6">
+        <div className="min-w-0 md:col-span-6">
           <div className="md:sticky md:top-24">
             <div className="relative">
               <Visible

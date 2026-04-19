@@ -5,10 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { Section } from "@/components/brand/section";
 import { Eyebrow } from "@/components/brand/eyebrow";
 import { Visible } from "@/components/lazy/visible";
-import {
-  RoutingEngineDiagram,
-  VerticalRoutingStream,
-} from "@/components/mocks/routing-engine";
+import { RoutingEngineDiagram } from "@/components/mocks/routing-engine";
 
 /**
  * [EXHIBIT B] — THE ROUTING ENGINE · SCHEMATIC
@@ -44,21 +41,23 @@ export function RoutingExhibit() {
               <span>[EXHIBIT B]</span>
               <span>THE ROUTING ENGINE · SCHEMATIC</span>
             </div>
-            <div className="mt-3 hidden md:block">
+            {/* [CHANGED 2026-04-19] Render the SVG schematic at every
+                breakpoint. The old mobile fallback (<VerticalRoutingStream />)
+                produced a tall scoring-readout list on small screens; the SVG
+                uses w-full + h-auto + preserveAspectRatio so it scales down
+                cleanly and keeps the narrative symmetric with [EXHIBIT A]. */}
+            <div className="mt-3">
               <Visible
-                minHeight={460}
+                minHeight={220}
                 fallback={
                   <div
                     aria-hidden
-                    className="h-[460px] w-full bg-[var(--color-paper-2)]"
+                    className="aspect-[960/520] w-full bg-[var(--color-paper-2)]"
                   />
                 }
               >
                 <RoutingEngineDiagram />
               </Visible>
-            </div>
-            <div className="mt-3 md:hidden">
-              <VerticalRoutingStream />
             </div>
           </motion.div>
         </div>

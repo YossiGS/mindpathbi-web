@@ -46,13 +46,18 @@ export function TechnicalSeller() {
           </dl>
         </div>
 
+        {/* [CHANGED 2026-04-19] minHeight dropped from 560 to 420. The
+            mock now runs side-by-side at every breakpoint and compacts
+            aggressively below lg:, so 560px was leaving a visible empty
+            strip under the card on tablet/phone widths. 420 is a safe
+            CLS-preventing floor that content naturally exceeds at lg:+. */}
         <div className="mt-10">
           <Visible
-            minHeight={560}
+            minHeight={420}
             fallback={
               <div
                 aria-hidden
-                className="h-[560px] w-full rounded-md border border-[var(--color-rule)] bg-[var(--color-paper-2)]"
+                className="h-[420px] w-full rounded-md border border-[var(--color-rule)] bg-[var(--color-paper-2)]"
               />
             }
           >
