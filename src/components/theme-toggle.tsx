@@ -1,67 +1,70 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useSyncExternalStore } from "react";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "light" | "dark";
 
-function getSystemTheme(): "dark" | "light" {
-  if (typeof window === "undefined") return "dark";
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-}
-
-function applyTheme(resolved: "dark" | "light") {
+function applyTheme(resolved: Theme) {
   document.documentElement.classList.remove("dark", "light");
   document.documentElement.classList.add(resolved);
 }
 
-export function ThemeToggle() {
-  const [preference, setPreference] = useState<Theme>("system");
-  const [resolved, setResolved] = useState<"dark" | "light">("dark");
+const THEME_EVENT = "mpbi:theme-change";
 
-  const resolve = useCallback((pref: Theme) => {
-    const r = pref === "system" ? getSystemTheme() : pref;
-    setResolved(r);
-    applyTheme(r);
-  }, []);
+function subscribe(onChange: () => void) {
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === "theme") onChange();
+  };
+  const onCustom = () => onChange();
+  window.addEventListener("storage", onStorage);
+  window.addEventListener(THEME_EVENT, onCustom);
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener(THEME_EVENT, onCustom);
+  };
+}
+
+function readPreference(): Theme {
+  const saved = localStorage.getItem("theme");
+  return saved === "dark" ? "dark" : "light";
+}
+
+function getSnapshot(): string {
+  return readPreference();
+}
+
+function getServerSnapshot(): string {
+  return "light";
+}
+
+export function ThemeToggle() {
+  const snapshot = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
+  const resolved = (snapshot === "dark" ? "dark" : "light") as Theme;
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") as Theme | null;
-    const pref = saved === "light" || saved === "dark" ? saved : "system";
-    setPreference(pref);
-    resolve(pref);
+    applyTheme(resolved);
+  }, [resolved]);
 
-    const mq = window.matchMedia("(prefers-color-scheme: light)");
-    const handler = () => {
-      if ((localStorage.getItem("theme") ?? "system") === "system") {
-        resolve("system");
-      }
-    };
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, [resolve]);
-
-  const cycle = () => {
-    const order: Theme[] = ["system", "dark", "light"];
-    const next = order[(order.indexOf(preference) + 1) % order.length];
-    setPreference(next);
-    resolve(next);
+  const toggle = useCallback(() => {
+    const next: Theme = resolved === "dark" ? "light" : "dark";
     localStorage.setItem("theme", next);
-  };
+    window.dispatchEvent(new CustomEvent(THEME_EVENT));
+  }, [resolved]);
+
+  const nextLabel = resolved === "dark" ? "light" : "dark";
 
   return (
     <button
-      onClick={cycle}
-      aria-label={`Theme: ${preference}`}
-      title={`Theme: ${preference === "system" ? `System (${resolved})` : preference}`}
+      onClick={toggle}
+      aria-label={`Switch to ${nextLabel} mode`}
+      title={`Theme: ${resolved} — click for ${nextLabel}`}
       className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-foreground/10"
     >
-      {preference === "system" ? (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ) : resolved === "dark" ? (
+      {resolved === "dark" ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted">
           <circle cx="12" cy="12" r="5" />
           <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />

@@ -1,110 +1,85 @@
-"use client";
+import * as React from "react";
+import { Section } from "@/components/brand/section";
+import { Eyebrow } from "@/components/brand/eyebrow";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-
-const questions = [
+const QUESTIONS = [
   {
-    q: "What makes MindPath BI different from a traditional CRM?",
-    a: "Traditional CRMs store contact records. MindPath BI connects every channel — email, WhatsApp, ERP, e-commerce — into a single timeline per customer. Add an AI Copilot that surfaces answers from your knowledge base in real time, health scores that flag churn before it happens, and a deal pipeline built on actual communication data — not manual data entry.",
+    q: "How is this different from a CRM?",
+    a: "A CRM records what already happened. MindPath BI sits on the drafting surface itself — it reads the thread, pulls the right page of your playbook, and drafts the reply your rep ships. The record-keeping is a by-product, not the job.",
   },
   {
-    q: "How does the AI Copilot work?",
-    a: "When a message comes in, the Copilot reads the conversation in real time and checks it against your uploaded knowledge base — product specs, pricing rules, installation guides, anything you've added. If it detects a technical or product question, it pulls the right answer and presents it to your rep instantly. No searching, no asking a colleague, no delays.",
+    q: "Does the AI ever answer without your team's review?",
+    a: "By default, no. Every draft lands in the rep's surface with a cite-your-source trail; a human clicks send. Autonomous send can be enabled per-intent, per-account, once you've watched the draft quality for a while.",
   },
   {
-    q: "Do my contacts know I'm using MindPath BI?",
-    a: "No. Messages sent through MindPath BI arrive natively on whatever platform your contact uses — Gmail, Outlook, WhatsApp, or any connected channel. To them it looks and feels exactly like a normal message. Your communication stays seamless and personal.",
+    q: "Do you train on our data?",
+    a: "No. Your conversations, documents, and corrections are used to serve your team and to refine the model in your tenant only. We do not pool tenant data to train shared models.",
   },
   {
-    q: "How long does setup take?",
-    a: "Most teams connect their first channel in under five minutes. The onboarding wizard walks you through linking email accounts, WhatsApp, and your ERP. Once connected, historical conversations sync automatically so you start with full context — not an empty screen.",
+    q: "Which channels are live today?",
+    a: "The list in the [CHANNELS] section is current. We add new surfaces when a design-partner needs one, not on a marketing cadence — so if the one you need is marked SOON, mention it in your access request.",
   },
   {
-    q: "Is my company's data secure?",
-    a: "Yes. All data is encrypted in transit and at rest using enterprise-grade protocols. MindPath BI does not sell or share your information. AI models process context only to serve your team's messages — never to train external systems.",
+    q: "How long does it take to feel the difference?",
+    a: "Most teams see the AI suggesting meaningful first drafts within the first week of connecting their knowledge base. Real behavioural shift — junior reps handling threads that used to escalate — shows up in the second month, not the first.",
   },
   {
-    q: "Can I try MindPath BI before committing?",
-    a: "We're onboarding teams in stages to ensure quality and dedicated support. Reach out to us and we'll set up a walkthrough tailored to your business. No generic demo — we show you your actual use case with your channels and workflows.",
+    q: "Can my customer tell I'm using this?",
+    a: "No. Replies go out natively on whatever channel the customer started on — Gmail looks like Gmail, WhatsApp looks like WhatsApp. The system sits behind your team, not between your team and the customer.",
+  },
+  {
+    q: "What does pricing look like?",
+    a: "Closed until public launch. Design-partner cohorts get a fixed, capped arrangement — we'll walk through the numbers on the access call.",
   },
 ];
 
-function PlusIcon({ open }: { open: boolean }) {
-  return (
-    <div className="relative h-5 w-5 shrink-0">
-      <span className="absolute inset-0 m-auto block h-[1.5px] w-4 rounded-full bg-muted transition-colors group-hover:bg-foreground" />
-      <span
-        className="absolute inset-0 m-auto block h-[1.5px] w-4 rounded-full bg-muted transition-all duration-200 group-hover:bg-foreground"
-        style={{ transform: `rotate(${open ? "0deg" : "90deg"})` }}
-      />
-    </div>
-  );
-}
-
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
-    <section id="faq" className="relative py-28 px-6">
-      <div className="mx-auto max-w-[720px]">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-sm font-medium text-muted">FAQ</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-[-0.02em] sm:text-4xl lg:text-[48px] lg:leading-[1.08]">
-            Common questions.
-            <br />
-            <span className="text-muted">Straight answers.</span>
+    <Section id="faq" rule="top" size="md" tone="paper">
+      <Eyebrow num="ARCHIVE" tag="STRAIGHT ANSWERS">
+        The questions that come up twice a week
+      </Eyebrow>
+
+      <div className="mt-8 grid gap-10 border-t border-[var(--color-rule)] pt-8 md:grid-cols-12 md:gap-12">
+        <div className="md:col-span-4">
+          <h2 className="text-2xl font-semibold tracking-[-0.01em] text-[var(--color-ink)] md:text-[32px] md:leading-[1.08]">
+            Before you ask on the access call.
           </h2>
-        </motion.div>
+          <p className="mt-4 text-sm leading-relaxed text-[var(--color-muted)]">
+            If your question isn&apos;t here, add it to the note field in the access form — we&apos;ll answer by email before we schedule.
+          </p>
+        </div>
 
-        <div className="mt-14 flex flex-col gap-3">
-          {questions.map((item, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <motion.div
+        <div className="md:col-span-8">
+          <Accordion type="single" collapsible className="w-full">
+            {QUESTIONS.map((item, i) => (
+              <AccordionItem
                 key={i}
-                className="group rounded-2xl border border-border transition-colors hover:border-border-light"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.35, delay: i * 0.04 }}
+                value={`q-${i}`}
+                className="border-b border-[var(--color-rule)] first:border-t"
               >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
-                >
-                  <span className="text-[15px] font-medium leading-snug">
-                    {item.q}
+                <AccordionTrigger className="py-5 text-left text-[15px] font-medium text-[var(--color-ink)] hover:no-underline">
+                  <span className="flex items-center gap-3">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted-2)]">
+                      [Q{String(i + 1).padStart(2, "0")}]
+                    </span>
+                    <span>{item.q}</span>
                   </span>
-                  <PlusIcon open={isOpen} />
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-6 pb-5 text-[14px] leading-relaxed text-muted">
-                        {item.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+                </AccordionTrigger>
+                <AccordionContent className="pb-5 text-[14px] leading-relaxed text-[var(--color-muted)]">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

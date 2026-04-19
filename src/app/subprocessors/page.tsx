@@ -1,170 +1,198 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  LegalPage,
+  LegalSection,
+  LegalTable,
+  LegalSealedBlock,
+} from "@/components/legal/legal-page";
 
 export const metadata: Metadata = {
   title: "Subprocessors — MindPath BI",
-  description: "Third-party subprocessors and service providers used by MindPath BI to deliver the service.",
+  description:
+    "Categories of third-party subprocessors MindPath BI engages to deliver the service. The detailed list is shared with customers under contract.",
 };
 
 export default function SubprocessorsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <nav className="border-b border-border">
-        <div className="mx-auto flex h-12 max-w-3xl items-center px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-foreground">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-background">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-              </svg>
-            </div>
-            <span className="text-sm font-semibold tracking-tight">MindPath BI</span>
-          </Link>
-        </div>
-      </nav>
+    <LegalPage
+      fieldReport="SP-01"
+      docSlug="SUBPROCESSORS"
+      title="Subprocessors."
+      subtitle="We engage a small set of specialist service providers to deliver the platform. This page names the categories; the individual identities are shared with customers under contract."
+      version="1.0"
+      lastUpdated="April 2026"
+    >
+      <p>
+        MindPath BI engages third-party subprocessors to deliver specific
+        functions of the service — hosting, AI inference, email delivery, error
+        monitoring, and a handful of developer-tooling providers. We publish
+        only the information required for a controller to assess a processor
+        under GDPR: <strong>category, purpose, data category, and region</strong>.
+        The identities of the specific providers — and their replacements — are
+        confirmed to customers under contract and re-confirmed before every
+        material change.
+      </p>
+      <p>
+        This reflects a deliberate choice: our vendor surface is small and it
+        shifts as the product matures. Publishing a flat list invites
+        extrapolation we&rsquo;re not yet willing to defend. Signing a DPA with
+        us unlocks the detailed inventory, the SCCs in effect, and the
+        change-notification feed.
+      </p>
 
-      <main className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight">Subprocessors &amp; Service Providers</h1>
-        <p className="mt-2 text-sm text-muted">Last updated: April 2026</p>
+      <LegalSection
+        num="01"
+        tag="[CATEGORIES]"
+        title="Subprocessor categories"
+      >
+        <p>
+          The following categories of subprocessor may process customer personal
+          data on our behalf to provide the service:
+        </p>
+        <LegalTable
+          headers={["Category", "Purpose", "Data category", "Region"]}
+          rows={[
+            [
+              <strong key="inf">Infrastructure &amp; hosting</strong>,
+              "Application hosting, database, object storage, edge delivery",
+              "All application data",
+              "EU (primary) · multi-region edge",
+            ],
+            [
+              <strong key="ai">AI inference</strong>,
+              "Language-model inference for Copilot, summaries, classification, and retrieval",
+              "Thread content, KB documents (processed in-memory, not retained for training)",
+              "EU or US (per provider topology)",
+            ],
+            [
+              <strong key="em">Transactional email</strong>,
+              "Outbound notification and service email delivery",
+              "Email addresses, notification content",
+              "EU",
+            ],
+            [
+              <strong key="er">Error &amp; performance monitoring</strong>,
+              "Application error capture, performance traces",
+              "Stack traces, request metadata (PII scrubbed)",
+              "US (governed by EU SCCs)",
+            ],
+            [
+              <strong key="sec">Content safety</strong>,
+              "Malware and attachment scanning",
+              "File content (scanned in-memory, not stored)",
+              "EU / self-hosted",
+            ],
+          ]}
+        />
+      </LegalSection>
 
-        <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-muted">
+      <LegalSection
+        num="02"
+        tag="[SERVICE-PROVIDERS]"
+        title="Service providers (no customer content)"
+      >
+        <p>
+          These categories of provider support engineering, build, and product
+          operations. They do not process customer personal data in the course
+          of delivering the service:
+        </p>
+        <LegalTable
+          headers={["Category", "Purpose", "Region"]}
+          rows={[
+            [
+              <strong key="scm">Source control &amp; CI</strong>,
+              "Source hosting, continuous integration, release pipelines",
+              "US",
+            ],
+            [
+              <strong key="reg">Artifact registries</strong>,
+              "Container image and build artifact storage",
+              "US / EU",
+            ],
+            [
+              <strong key="an">Site analytics</strong>,
+              "Privacy-friendly, anonymous web analytics for the marketing site",
+              "Multi-region",
+            ],
+          ]}
+        />
+      </LegalSection>
+
+      <LegalSection num="03" tag="[SEALED]" title="Detailed inventory">
+        <LegalSealedBlock label="WITHHELD · DISCLOSED UNDER DPA">
           <p>
-            MindPath BI uses the following third-party subprocessors and service providers to deliver the service. This page is
-            maintained as part of our commitment to transparency under GDPR and applicable data protection regulations.
+            The full inventory — provider identities, corporate entities,
+            hosting regions, applicable certifications (ISO 27001, SOC 2, &c.),
+            the specific SCCs in force, and the change-notification feed — is
+            shared with every customer as part of the DPA onboarding packet.
+            Prospects under mutual NDA can request it on the access call.
           </p>
+        </LegalSealedBlock>
+      </LegalSection>
 
-          <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">Subprocessors</h2>
-            <p>These entities process customer personal data on our behalf to provide the Service:</p>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="pb-2 pr-4 font-semibold text-foreground">Subprocessor</th>
-                    <th className="pb-2 pr-4 font-semibold text-foreground">Purpose</th>
-                    <th className="pb-2 pr-4 font-semibold text-foreground">Data Categories</th>
-                    <th className="pb-2 font-semibold text-foreground">Region</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Vercel</td>
-                    <td className="py-3 pr-4">Frontend hosting, edge CDN</td>
-                    <td className="py-3 pr-4">App metadata, request metadata</td>
-                    <td className="py-3">Multi-region</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">OVH</td>
-                    <td className="py-3 pr-4">Backend infrastructure, database, object storage</td>
-                    <td className="py-3 pr-4">All application data</td>
-                    <td className="py-3">EU (France)</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Google (Gemini)</td>
-                    <td className="py-3 pr-4">Primary AI provider</td>
-                    <td className="py-3 pr-4">Thread content, KB documents (processed, not stored)</td>
-                    <td className="py-3">US/EU</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Brevo</td>
-                    <td className="py-3 pr-4">Transactional email delivery</td>
-                    <td className="py-3 pr-4">Email addresses, notification content</td>
-                    <td className="py-3">EU</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Sentry</td>
-                    <td className="py-3 pr-4">Error tracking</td>
-                    <td className="py-3 pr-4">Stack traces, request metadata (no PII)</td>
-                    <td className="py-3">US</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">ClamAV (self-hosted)</td>
-                    <td className="py-3 pr-4">Malware scanning</td>
-                    <td className="py-3 pr-4">File content (scanned in-memory, not stored)</td>
-                    <td className="py-3">Self-hosted</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+      <LegalSection
+        num="04"
+        tag="[REVIEW]"
+        title="Vendor review cadence"
+      >
+        <p>We maintain a formal vendor risk-management program:</p>
+        <ul>
+          <li>
+            <strong>Critical categories</strong> (infrastructure, AI inference,
+            database): reviewed <strong>semi-annually</strong>.
+          </li>
+          <li>
+            <strong>Important categories</strong> (email delivery, error
+            monitoring): reviewed <strong>annually</strong>.
+          </li>
+          <li>
+            <strong>Standard service providers</strong> (CI, registries,
+            developer tools): reviewed at <strong>renewal or biennially</strong>.
+          </li>
+        </ul>
+        <p>
+          Reviews assess security posture, compliance certifications, data
+          handling practices, and business-continuity capabilities. Material
+          findings are routed to the change-management process below.
+        </p>
+      </LegalSection>
 
-          <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">Service Providers</h2>
-            <p>These entities provide infrastructure and development services but do not process customer personal data:</p>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="pb-2 pr-4 font-semibold text-foreground">Provider</th>
-                    <th className="pb-2 pr-4 font-semibold text-foreground">Purpose</th>
-                    <th className="pb-2 font-semibold text-foreground">Region</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">GitHub</td>
-                    <td className="py-3 pr-4">Source code hosting, CI/CD</td>
-                    <td className="py-3">US</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Docker Hub</td>
-                    <td className="py-3 pr-4">Container image registry</td>
-                    <td className="py-3">US</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Vercel Analytics</td>
-                    <td className="py-3 pr-4">Privacy-friendly, anonymous website analytics</td>
-                    <td className="py-3">Multi-region</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+      <LegalSection num="05" tag="[CHANGES]" title="Change management">
+        <p>
+          Material changes — additions, removals, or region changes — are
+          reviewed by Security and Legal before activation. We provide at least{" "}
+          <strong>10 calendar days&rsquo;</strong> advance notice before
+          engaging a new subprocessor to every customer subscribed to the
+          change-notification feed. Customer notification follows the
+          contractual notice terms defined in your{" "}
+          <Link href="/dpa">Data Processing Addendum</Link>.
+        </p>
+      </LegalSection>
 
-          <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">Vendor Review Cadence</h2>
-            <p>We maintain a formal vendor risk management program:</p>
-            <ul className="mt-3 list-disc space-y-2 pl-6">
-              <li><strong className="text-foreground">Critical subprocessors</strong> (infrastructure, AI, database): reviewed <strong className="text-foreground">semi-annually</strong>.</li>
-              <li><strong className="text-foreground">Important subprocessors</strong> (email delivery, error tracking): reviewed <strong className="text-foreground">annually</strong>.</li>
-              <li><strong className="text-foreground">Standard service providers</strong> (container registry, development tools): reviewed at <strong className="text-foreground">renewal or biennially</strong>.</li>
-            </ul>
-            <p className="mt-3">Reviews assess security posture, compliance certifications, data handling practices, and business continuity capabilities.</p>
-          </section>
+      <LegalSection
+        num="06"
+        tag="[NOTIFY]"
+        title="Receive change notifications"
+      >
+        <p>
+          To receive advance email notifications when we add, remove, or
+          materially change a subprocessor, email{" "}
+          <a href="mailto:josef@mindpathbi.com?subject=Subprocessor%20Change%20Notifications&body=Please%20add%20me%20to%20the%20subprocessor%20change%20notification%20list.%0A%0AOrganization%3A%20%0AContact%20email%3A%20">
+            josef@mindpathbi.com
+          </a>{" "}
+          with the subject line &ldquo;Subprocessor Change
+          Notifications.&rdquo;
+        </p>
+      </LegalSection>
 
-          <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">Change Management</h2>
-            <p>
-              Material changes to our subprocessor list are reviewed by our Security and Legal teams before
-              activation. We provide at least <strong className="text-foreground">10 calendar days&rsquo;</strong> advance
-              notice before engaging a new subprocessor. Customer notification follows contractual notice terms
-              as outlined in your{" "}
-              <Link href="/dpa" className="text-foreground underline underline-offset-2 hover:opacity-80">Data Processing Addendum</Link>.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">Receive Change Notifications</h2>
-            <p>
-              To receive advance email notifications when we add or change subprocessors, contact us at{" "}
-              <a href="mailto:josef@mindpathbi.com?subject=Subprocessor%20Change%20Notifications&body=Please%20add%20me%20to%20the%20subprocessor%20change%20notification%20list.%0A%0AOrganization%3A%20%0AContact%20email%3A%20" className="text-foreground underline underline-offset-2 hover:opacity-80">josef@mindpathbi.com</a> with
-              the subject &ldquo;Subprocessor Change Notifications.&rdquo;
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-semibold text-foreground">Questions</h2>
-            <p>
-              If you have questions about our subprocessors, please contact us at{" "}
-              <a href="mailto:josef@mindpathbi.com" className="text-foreground underline underline-offset-2 hover:opacity-80">josef@mindpathbi.com</a>.
-            </p>
-          </section>
-        </div>
-
-        <div className="mt-16 border-t border-border pt-8 text-center text-xs text-muted">
-          &copy; 2026 MindPath BI. All rights reserved.
-        </div>
-      </main>
-    </div>
+      <LegalSection num="07" tag="[CONTACT]" title="Questions">
+        <p>
+          For DPA requests, the detailed subprocessor inventory, or any other
+          vendor-management question, contact{" "}
+          <a href="mailto:josef@mindpathbi.com">josef@mindpathbi.com</a>.
+        </p>
+      </LegalSection>
+    </LegalPage>
   );
 }

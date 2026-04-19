@@ -3,46 +3,49 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeScript } from "./theme-script";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
+import { SmoothScroll } from "@/components/providers/smooth-scroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "MindPath BI — Unified Business Intelligence for SMBs",
+  title: "MindPath BI — Every rep, a technical seller.",
   description:
-    "One platform for every customer touchpoint. Unified inbox, Client 360, AI copilot, and deep integrations — built for teams that refuse to lose another customer to fragmented tools.",
+    "Your catalog, your contracts, your guides — answering beside every conversation. A classified brief on the unified inbox built for technical sales.",
   keywords: [
-    "customer service platform",
     "unified inbox",
-    "business intelligence",
+    "technical sales",
     "AI copilot",
-    "SMB",
-    "client 360",
-    "WhatsApp Business",
-    "Gmail integration",
-    "SAP integration",
-    "omnichannel support",
+    "sales enablement",
+    "customer conversations",
+    "knowledge retrieval",
+    "grounded AI",
+    "conversation intelligence",
   ],
   openGraph: {
-    title: "MindPath BI — Unified Business Intelligence for SMBs",
+    title: "MindPath BI — Every rep, a technical seller.",
     description:
-      "One platform for every customer touchpoint. Unified inbox, Client 360, AI copilot, and deep integrations.",
+      "Your catalog, your contracts, your guides — answering beside every conversation.",
     url: "https://mindpathbi.com",
     siteName: "MindPath BI",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MindPath BI — Unified Business Intelligence for SMBs",
+    title: "MindPath BI — Every rep, a technical seller.",
     description:
-      "One platform for every customer touchpoint. Unified inbox, Client 360, AI copilot, and deep integrations.",
+      "Your catalog, your contracts, your guides — answering beside every conversation.",
   },
   metadataBase: new URL("https://mindpathbi.com"),
 };
@@ -53,14 +56,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         <ThemeScript />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SmoothScroll>
+          <TooltipProvider delayDuration={120}>
+            {children}
+            <Toaster position="bottom-right" />
+          </TooltipProvider>
+        </SmoothScroll>
         <Analytics />
       </body>
     </html>
